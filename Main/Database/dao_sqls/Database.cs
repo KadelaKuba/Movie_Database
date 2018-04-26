@@ -3,11 +3,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace AuctionSystem.ORM.DAO.Sqls
+namespace Main.ORM.DAO.Sqls
 {
-    /// <summary>
     /// Represents a MS SQL Database
-    /// </summary>
     public class Database
     {
         private SqlConnection Connection { get; set; }
@@ -20,12 +18,10 @@ namespace AuctionSystem.ORM.DAO.Sqls
             Language = "en";
         }
 
-        /// <summary>
         /// Connect
-        /// </summary>
         public bool Connect(string conString)
         {
-            if (Connection.State != System.Data.ConnectionState.Open)
+            if (Connection.State != ConnectionState.Open)
             {
                 Connection.ConnectionString = conString;
                 Connection.Open();
@@ -34,13 +30,11 @@ namespace AuctionSystem.ORM.DAO.Sqls
 
         }
 
-        /// <summary>
         /// Connect
-        /// </summary>
         public bool Connect()
         {
             bool ret = true;
-            if (Connection.State != System.Data.ConnectionState.Open)
+            if (Connection.State != ConnectionState.Open)
             {
                 // connection string is stored in file App.config or Web.config
                 ret = Connect(ConfigurationManager.ConnectionStrings["ConnectionStringMsSql"].ConnectionString);
@@ -48,42 +42,32 @@ namespace AuctionSystem.ORM.DAO.Sqls
             return ret;
         }
 
-        /// <summary>
         /// Close
-        /// </summary>
         public void Close()
         {
             Connection.Close();
         }
 
-        /// <summary>
         /// Begin a transaction.
-        /// </summary>
         public void BeginTransaction()
         {
             SqlTransaction = Connection.BeginTransaction(IsolationLevel.Serializable);
         }
 
-        /// <summary>
         /// End a transaction.
-        /// </summary>
         public void EndTransaction()
         {
             SqlTransaction.Commit();
             Close();
         }
 
-        /// <summary>
         /// If a transaction is failed call it.
-        /// </summary>
         public void Rollback()
         {
             SqlTransaction.Rollback();
         }
 
-        /// <summary>
         /// Insert a record encapulated in the command.
-        /// </summary>
         public int ExecuteNonQuery(SqlCommand command)
         {
             int rowNumber = 0;
@@ -98,9 +82,7 @@ namespace AuctionSystem.ORM.DAO.Sqls
             return rowNumber;
         }
 
-        /// <summary>
         /// Create command
-        /// </summary>
         public SqlCommand CreateCommand(string strCommand)
         {
             SqlCommand command = new SqlCommand(strCommand, Connection);
@@ -112,9 +94,7 @@ namespace AuctionSystem.ORM.DAO.Sqls
             return command;
         }
 
-        /// <summary>
         /// Select encapulated in the command.
-        /// </summary>
         public SqlDataReader Select(SqlCommand command)
         {
             SqlDataReader sqlReader = command.ExecuteReader();

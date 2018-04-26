@@ -11,6 +11,5 @@ namespace Main.ORM.DAO.Sqls
 {
     public class MovieTable
     {
-
     }
 }
