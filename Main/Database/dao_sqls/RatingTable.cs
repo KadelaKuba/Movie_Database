@@ -13,10 +13,10 @@ namespace Main.ORM.DAO.Sqls
     {
         public static String SQL_SELECT = "SELECT * FROM \"Rating\"";
         public static String SQL_SELECT_MOVIE_ID = "SELECT * FROM \"Rating\" WHERE Movie_ID=@id";
-        public static String SQL_SELECT_USER_ID = "SELECT * FROM \"Rating\" WHERE User=@id";
-        public static String SQL_INSERT = "INSERT INTO \"Rating\" VALUES (@Movie_ID, @User_ID, @rating, @dateOfAdd, @comment)";
+        public static String SQL_SELECT_USER_ID = "SELECT * FROM \"Rating\" WHERE User_ID=@User_ID";
+        public static String SQL_INSERT = "INSERT INTO \"Rating\" VALUES (@Movie_ID, @User_ID, @rate, @dateOfAdd, @comment)";
         public static String SQL_DELETE_ID = "DELETE FROM \"Rating\" WHERE Movie_ID=@Movie_ID and User_ID=@User_ID";
-        public static String SQL_UPDATE = "UPDATE \"Rating\" SET rating = @rating, " +
+        public static String SQL_UPDATE = "UPDATE \"Rating\" SET rate = @rate, " +
             " dateOfAdd = @dateOfAdd, comment = @comment WHERE Movie_ID=@Movie_ID and User_ID=@User_ID";
 
         /// Insert the record.
@@ -138,7 +138,7 @@ namespace Main.ORM.DAO.Sqls
 
         /// Select the record.
         /// <param name="id">user id</param>
-        public static Rating SelectUserID(int UserID, Database pDb = null)
+        public static Rating SelectUserID(int User_ID, Database pDb = null)
         {
             Database db;
             if (pDb == null)
@@ -153,7 +153,7 @@ namespace Main.ORM.DAO.Sqls
 
             SqlCommand command = db.CreateCommand(SQL_SELECT_USER_ID);
 
-            command.Parameters.AddWithValue("@UserID", UserID);
+            command.Parameters.AddWithValue("@User_ID", User_ID);
             SqlDataReader reader = db.Select(command);
 
             Collection<Rating> Ratings = Read(reader);
@@ -175,7 +175,7 @@ namespace Main.ORM.DAO.Sqls
         /// Delete the record.
         /// <param name="idUser">user id</param>
         /// <returns></returns>
-        public static int Delete(int UserID, int MovieID, Database pDb = null)
+        public static int Delete(int User_ID, int Movie_ID, Database pDb = null)
         {
             Database db;
             if (pDb == null)
@@ -189,8 +189,8 @@ namespace Main.ORM.DAO.Sqls
             }
             SqlCommand command = db.CreateCommand(SQL_DELETE_ID);
 
-            command.Parameters.AddWithValue("@UserID", UserID);
-            command.Parameters.AddWithValue("@MovieID", MovieID);
+            command.Parameters.AddWithValue("@User_ID", User_ID);
+            command.Parameters.AddWithValue("@Movie_ID", Movie_ID);
 
             int ret = db.ExecuteNonQuery(command);
 
@@ -206,10 +206,10 @@ namespace Main.ORM.DAO.Sqls
         private static void PrepareCommand(SqlCommand command, Rating Rating)
         {
             command.Parameters.AddWithValue("@Movie_ID", Rating.Movie_id);
-            command.Parameters.AddWithValue("@nickname", Rating.User_id);
-            command.Parameters.AddWithValue("@firstName", Rating.Rate);
-            command.Parameters.AddWithValue("@lastName", Rating.Dateofadd);
-            command.Parameters.AddWithValue("@email", Rating.Comment);
+            command.Parameters.AddWithValue("@User_ID", Rating.User_id);
+            command.Parameters.AddWithValue("@rate", Rating.Rate);
+            command.Parameters.AddWithValue("@dateOfAdd", Rating.Dateofadd);
+            command.Parameters.AddWithValue("@comment", Rating.Comment);
         }
 
         private static Collection<Rating> Read(SqlDataReader reader)

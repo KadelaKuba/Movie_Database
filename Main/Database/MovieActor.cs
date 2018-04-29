@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Main.ORM
 {
-    public class Movie_Actor
+    public class MovieActor
     {
         public int Movie_id { get; set; }
         public int Actor_id { get; set; }

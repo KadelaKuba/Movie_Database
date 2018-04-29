@@ -10,8 +10,8 @@ namespace Main.ORM
     {
         public int Movie_id { get; set; }
         public int User_id { get; set; }
-        public double Rate { get; set;} //rename the attribute
+        public double Rate { get; set;}
         public DateTime Dateofadd { get; set; }
         public string Comment { get; set; }
-}
+    }
 }

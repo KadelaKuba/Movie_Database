@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Main.ORM
 {
-    public class Movie_Genre
+    public class MovieGenre
     {
         public int Movie_id { get; set; }
         public int Genre_id { get; set; }
+        public DateTime? dateOfAdd { get; set; }
     }
 }
