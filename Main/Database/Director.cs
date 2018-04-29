@@ -14,5 +14,5 @@ namespace Main.ORM
         public string Nationality { get; set; }
         public string Birthplace { get; set; }
         public double? Height { get; set;}
-}
+    }
 }
