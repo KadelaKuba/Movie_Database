@@ -11,12 +11,12 @@ namespace Main.ORM.DAO.Sqls
 {
     class MovieGenreTable
     {
-        public static String SQL_SELECT = "SELECT * FROM \"Movie_Genre\"";
-        public static String SQL_SELECT_MOVIE_ID = "SELECT * FROM \"Movie_Genre\" WHERE Movie_ID=@Movie_ID";
-        public static String SQL_SELECT_GENRE_ID = "SELECT * FROM \"Movie_Genre\" WHERE Genre_ID=@Genre_ID";
-        public static String SQL_INSERT = "INSERT INTO \"Movie_Genre\" VALUES (@Movie_ID, @Genre_ID, @dateOfAdd)";
-        public static String SQL_DELETE_ID = "DELETE FROM \"Movie_Genre\" WHERE Movie_ID=@Movie_ID and Genre_ID=@Genre_ID";
-        public static String SQL_UPDATE = "UPDATE \"Movie_Genre\" SET dateOfAdd = @dateOfAdd WHERE Movie_ID = @Movie_ID, Genre_ID = @Genre_ID";
+        public static String SQL_SELECT = "SELECT * FROM \"MovieGenre\"";
+        public static String SQL_SELECT_MOVIE_ID = "SELECT * FROM \"MovieGenre\" WHERE Movie_ID=@Movie_ID";
+        public static String SQL_SELECT_GENRE_ID = "SELECT * FROM \"MovieGenre\" WHERE Genre_ID=@Genre_ID";
+        public static String SQL_INSERT = "INSERT INTO \"MovieGenre\" VALUES (@Movie_ID, @Genre_ID, @dateOfAdd)";
+        public static String SQL_DELETE_ID = "DELETE FROM \"MovieGenre\" WHERE Movie_ID=@Movie_ID and Genre_ID=@Genre_ID";
+        public static String SQL_UPDATE = "UPDATE \"MovieGenre\" SET dateOfAdd = @dateOfAdd WHERE Movie_ID = @Movie_ID and Genre_ID = @Genre_ID";
 
         /// Insert the record.
         public static int Insert(MovieGenre movieGenre, Database pDb = null)

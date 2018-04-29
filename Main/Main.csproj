@@ -49,7 +49,7 @@
     <Compile Include="Database\dao_sqls\Database.cs" />
     <Compile Include="Database\dao_sqls\DirectorTable.cs" />
     <Compile Include="Database\dao_sqls\GenreTable.cs" />
-    <Compile Include="Database\dao_sqls\MovieActor.cs" />
+    <Compile Include="Database\dao_sqls\MovieActorTable.cs" />
     <Compile Include="Database\dao_sqls\MovieGenreTable.cs" />
     <Compile Include="Database\dao_sqls\MovieTable.cs" />
     <Compile Include="Database\dao_sqls\RatingHistoryTable.cs" />

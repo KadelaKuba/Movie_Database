@@ -15,6 +15,12 @@ namespace Main
             //------------------------------------------------------------------
             //                  Delete all data from db
             //------------------------------------------------------------------
+            Collection<RatingHistory> ratingHistories1 = RatingHistoryTable.Select();
+            foreach (RatingHistory ratingHist in ratingHistories1)
+            {
+                RatingHistoryTable.Delete(ratingHist.Id);
+            }
+
             Collection<Rating> ratings1 = RatingTable.Select();
             foreach (Rating rate in ratings1)
             {
@@ -27,6 +33,30 @@ namespace Main
                 UserTable.Delete(user.Id);
             }
 
+            Collection<MovieGenre> movieGenres1 = MovieGenreTable.Select();      
+            foreach (MovieGenre movieGen in movieGenres1)
+            {
+                MovieGenreTable.Delete(movieGen.Movie_id, movieGen.Genre_id);
+            }
+
+            Collection<Genre> genres1 = GenreTable.Select();
+            foreach (Genre gen in genres1)
+            {
+                GenreTable.Delete(gen.Id);
+            }
+
+            Collection<MovieActor> movieActors1 = MovieActorTable.Select();
+            foreach (MovieActor movieAct in movieActors1)
+            {
+                MovieActorTable.Delete(movieAct.Actor_id, movieAct.Movie_id);
+            }
+
+            Collection<Actor> actors1 = ActorTable.Select();
+            foreach (Actor act in actors1)
+            {
+                ActorTable.Delete(act.Id);
+            }
+
             Collection<Movie> movies1 = MovieTable.Select();
             foreach (Movie mov in movies1)
             {
@@ -37,7 +67,7 @@ namespace Main
             foreach (Director dir in dirs)
             {
                 DirectorTable.Delete(dir.Id);
-            }            
+            }
 
             //------------------------------------------------------------------
             //                          User
@@ -115,7 +145,6 @@ namespace Main
             foreach (Movie mov in movies)
             {
                 Console.WriteLine(MovieTable.Select(mov.Id, db).ToString());
-                //MovieTable.Delete(mov.Id);
             }
 
             //------------------------------------------------------------------
@@ -136,7 +165,6 @@ namespace Main
             foreach (Genre gen in genres)
             {
                 Console.WriteLine(GenreTable.Select(gen.Id, db).ToString());
-                GenreTable.Delete(gen.Id);
             }
 
             //------------------------------------------------------------------
@@ -160,7 +188,6 @@ namespace Main
             foreach (Actor act in actors)
             {
                 Console.WriteLine(ActorTable.Select(act.Id, db).ToString());
-                ActorTable.Delete(act.Id);
             }
 
             //------------------------------------------------------------------
@@ -175,7 +202,7 @@ namespace Main
 
             RatingTable.Insert(rating, db);
 
-            actor.Firstname = "Jozef";
+            rating.Dateofadd = new DateTime(2018, 05, 09);
             RatingTable.Update(rating, db);
 
             Collection<Rating> ratings = RatingTable.Select();
@@ -183,10 +210,71 @@ namespace Main
             foreach (Rating rate in ratings)
             {
                 Console.WriteLine(RatingTable.SelectMovieID(rate.Movie_id, db).ToString());
-                RatingTable.Delete(rate.Movie_id, rate.User_id);
             }
 
+            //------------------------------------------------------------------
+            //                          RatingHistory
+            //------------------------------------------------------------------
+            RatingHistory ratingHistory = new RatingHistory();
+            ratingHistory.Id = 1;
+            ratingHistory.Rate = 9.5m;
+            ratingHistory.Dateofchange = new DateTime(2018, 04, 30);
+            ratingHistory.Comment = "Uleželo se mi to v hlavě";
+            ratingHistory.Rating_movie_id = 1;
+            ratingHistory.Rating_userinfo_id = 1;
 
+            RatingHistoryTable.Insert(ratingHistory, db);
+
+            ratingHistory.Rate = 9m;
+            RatingHistoryTable.Update(ratingHistory, db);
+
+            Collection<RatingHistory> ratingHistories = RatingHistoryTable.Select();
+
+            foreach (RatingHistory ratingHist in ratingHistories)
+            {
+                Console.WriteLine(RatingHistoryTable.Select(ratingHist.Id, db).ToString());
+            }
+
+            //------------------------------------------------------------------
+            //                          MovieGenre
+            //------------------------------------------------------------------
+            MovieGenre movieGenre = new MovieGenre();
+            movieGenre.Movie_id = 1;
+            movieGenre.Genre_id = 1;
+            movieGenre.dateOfAdd = new DateTime(2016, 03, 22);
+
+            MovieGenreTable.Insert(movieGenre, db);
+
+            movieGenre.dateOfAdd = new DateTime(2016, 03, 25);
+            MovieGenreTable.Update(movieGenre, db);
+
+            Collection<MovieGenre> movieGenres = MovieGenreTable.Select();
+
+            foreach (MovieGenre movieGen in movieGenres)
+            {
+                Console.WriteLine(MovieGenreTable.SelectMovieId(movieGen.Movie_id, db).ToString());
+            }
+
+            //------------------------------------------------------------------
+            //                          MovieGenre
+            //------------------------------------------------------------------
+            MovieActor movieActor = new MovieActor();
+            movieActor.Movie_id = 1;
+            movieActor.Actor_id = 1;
+            movieActor.Role = "Hlavní hrdina";
+            movieActor.Fee = 22000;
+
+            MovieActorTable.Insert(movieActor, db);
+
+            movieActor.Fee = 25000;
+            MovieActorTable.Update(movieActor, db);
+
+            Collection<MovieActor> movieActors = MovieActorTable.Select();
+
+            foreach (MovieActor movieAct in movieActors)
+            {
+                Console.WriteLine(MovieActorTable.SelectMovieId(movieAct.Movie_id, db).ToString());
+            }
 
             db.Close();
         }

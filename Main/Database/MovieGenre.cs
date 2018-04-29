@@ -11,5 +11,10 @@ namespace Main.ORM
         public int Movie_id { get; set; }
         public int Genre_id { get; set; }
         public DateTime? dateOfAdd { get; set; }
+
+        public override string ToString()
+        {
+            return "dateOfAdd: " + dateOfAdd;
+        }
     }
 }

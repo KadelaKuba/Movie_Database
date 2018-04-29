@@ -13,7 +13,7 @@ namespace Main.ORM.DAO.Sqls
     {
         public static String SQL_SELECT = "SELECT * FROM \"RatingHistory\"";
         public static String SQL_SELECT_ID = "SELECT * FROM \"RatingHistory\" WHERE ID=@ID";
-        public static String SQL_INSERT = "INSERT INTO \"RatingHistory\" VALUES (@rate, @dateOfChange, @comment, @Rating_movie_id, @Rating_userinfo_id)";
+        public static String SQL_INSERT = "INSERT INTO \"RatingHistory\" VALUES (@ID, @rate, @dateOfChange, @comment, @Rating_movie_id, @Rating_userinfo_id)";
         public static String SQL_DELETE_ID = "DELETE FROM \"RatingHistory\" WHERE ID=@ID";
         public static String SQL_UPDATE = "UPDATE \"RatingHistory\" SET rate = @rate, " +
             " dateOfChange = @dateOfChange, comment = @comment, Rating_movie_id = @Rating_movie_id, Rating_userinfo_id = @Rating_userinfo_id WHERE ID=@ID";
@@ -168,7 +168,7 @@ namespace Main.ORM.DAO.Sqls
         private static void PrepareCommand(SqlCommand command, RatingHistory ratingHistory)
         {
             command.Parameters.AddWithValue("@ID", ratingHistory.Id);
-            command.Parameters.AddWithValue("@rate", ratingHistory.rate);
+            command.Parameters.AddWithValue("@rate", ratingHistory.Rate);
             command.Parameters.AddWithValue("@dateOfChange", ratingHistory.Dateofchange);
             command.Parameters.AddWithValue("@comment", ratingHistory.Comment);
             command.Parameters.AddWithValue("@Rating_movie_id", ratingHistory.Rating_movie_id);
@@ -184,7 +184,7 @@ namespace Main.ORM.DAO.Sqls
                 int i = -1;
                 RatingHistory ratingHistory = new RatingHistory();
                 ratingHistory.Id = reader.GetInt32(++i);
-                ratingHistory.rate = reader.GetDouble(++i);
+                ratingHistory.Rate = reader.GetDecimal(++i);
                 ratingHistory.Dateofchange = reader.GetDateTime(++i);
                 if (!reader.IsDBNull(++i))
                 {

@@ -102,7 +102,7 @@ namespace Main.ORM.DAO.Sqls
 
         /// Select the record.
         /// <param name="id">user id</param>
-        public static MovieActor SelectMovieID(int Movie_ID, Database pDb = null)
+        public static MovieActor SelectMovieId(int Movie_ID, Database pDb = null)
         {
             Database db;
             if (pDb == null)
