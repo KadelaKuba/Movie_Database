@@ -13,6 +13,11 @@ namespace Main.ORM
         public string Lastname { get; set; }
         public string Nationality { get; set; }
         public string Birthplace { get; set; }
-        public double? Height { get; set;}
+        public decimal? Height { get; set;}
+
+        public override string ToString()
+        {
+            return "ID: " + Id;
+        }
     }
 }

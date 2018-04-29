@@ -18,5 +18,10 @@ namespace Main.ORM
         public bool? Award { get; set; }
         public DateTime Premiere { get; set; }
         public int Director_id { get; set; }
+
+        public override string ToString()
+        {
+            return "ID: " + Id;
+        }
     }
 }

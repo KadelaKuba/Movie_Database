@@ -16,7 +16,7 @@ namespace Main.ORM.DAO.Sqls
         public static String SQL_INSERT = "INSERT INTO \"Director\" VALUES (@ID, @firstName, @lastName, @nationality, @birthplace, @height)";
         public static String SQL_DELETE_ID = "DELETE FROM \"Director\" WHERE ID=@ID";
         public static String SQL_UPDATE = "UPDATE \"Director\" SET firstName = @firstName, lastName = @lastName, nationality = @nationality, " +
-            " birthplace = @birthplace, birthplace = @birthplace, height = @height WHERE ID = @ID";
+            " birthplace = @birthplace, height = @height WHERE ID = @ID";
 
         /// Insert the record.
         public static int Insert(Director director, Database pDb = null)
@@ -193,7 +193,7 @@ namespace Main.ORM.DAO.Sqls
                 }
                 if (!reader.IsDBNull(++i))
                 {
-                    director.Height = reader.GetInt32(i);
+                    director.Height = reader.GetDecimal(i);
                 }
 
                 directors.Add(director);

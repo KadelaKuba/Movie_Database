@@ -200,8 +200,8 @@ namespace Main.ORM.DAO.Sqls
                 {
                     Movie.Award = reader.GetBoolean(i);
                 }
-                Movie.Premiere = reader.GetDateTime(i);
-                Movie.Director_id = reader.GetInt32(i);
+                Movie.Premiere = reader.GetDateTime(++i);
+                Movie.Director_id = reader.GetInt32(++i);
 
                 Movies.Add(Movie);
             }

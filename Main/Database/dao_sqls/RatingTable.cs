@@ -12,7 +12,7 @@ namespace Main.ORM.DAO.Sqls
     public class RatingTable
     {
         public static String SQL_SELECT = "SELECT * FROM \"Rating\"";
-        public static String SQL_SELECT_MOVIE_ID = "SELECT * FROM \"Rating\" WHERE Movie_ID=@id";
+        public static String SQL_SELECT_MOVIE_ID = "SELECT * FROM \"Rating\" WHERE Movie_ID=@Movie_ID";
         public static String SQL_SELECT_USER_ID = "SELECT * FROM \"Rating\" WHERE User_ID=@User_ID";
         public static String SQL_INSERT = "INSERT INTO \"Rating\" VALUES (@Movie_ID, @User_ID, @rate, @dateOfAdd, @comment)";
         public static String SQL_DELETE_ID = "DELETE FROM \"Rating\" WHERE Movie_ID=@Movie_ID and User_ID=@User_ID";
@@ -222,7 +222,7 @@ namespace Main.ORM.DAO.Sqls
                 Rating rating = new Rating();
                 rating.Movie_id = reader.GetInt32(++i);
                 rating.User_id = reader.GetInt32(++i);
-                rating.Rate = reader.GetDouble(++i);
+                rating.Rate = reader.GetDecimal(++i);
                 rating.Dateofadd = reader.GetDateTime(++i);
                 if (!reader.IsDBNull(++i))
                 {

@@ -13,7 +13,7 @@ namespace Main.ORM.DAO.Sqls
     {
         public static String SQL_SELECT = "SELECT * FROM \"UserInfo\"";
         public static String SQL_SELECT_ID = "SELECT * FROM \"UserInfo\" WHERE ID=@ID";
-        public static String SQL_INSERT = "INSERT INTO \"UserInfo\" VALUES (@nickname, @firstName, @lastName, @email, " +
+        public static String SQL_INSERT = "INSERT INTO \"UserInfo\" VALUES (@ID, @nickname, @firstName, @lastName, @email, " +
             "@points, @rank, @sex, @country, @shortInfo)";
         public static String SQL_DELETE_ID = "DELETE FROM \"UserInfo\" WHERE ID=@ID";
         public static String SQL_UPDATE = "UPDATE \"UserInfo\" SET nickname = @nickname, firstName = @firstName, " +
@@ -36,8 +36,8 @@ namespace Main.ORM.DAO.Sqls
 
             SqlCommand command = db.CreateCommand(SQL_INSERT);
             PrepareCommand(command, user);
-            int ret = db.ExecuteNonQuery(command);
-
+            int ret = db.ExecuteNonQuery(command);    
+            
             if (pDb == null)
             {
                 db.Close();
@@ -61,11 +61,8 @@ namespace Main.ORM.DAO.Sqls
             }
 
             SqlCommand command = db.CreateCommand(SQL_UPDATE);
-            Console.WriteLine(user.ToString());
-            //Console.WriteLine(user.Id);
             PrepareCommand(command, user);
             int ret = db.ExecuteNonQuery(command);
-            //Console.WriteLine(command.Parameters.ToString());
 
             if (pDb == null)
             {

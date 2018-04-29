@@ -21,7 +21,7 @@ namespace Main.ORM
 
         public override string ToString()
         {
-            return "ID: " + Id + " Jméno a příjmeni:  " + Firstname + " " + Lastname + " Email: " + Email + " points " + Points;
+            return "ID: " + Id + ", Nickname: " + Nickname + ", Jméno a příjmeni: " + Firstname + " " + Lastname + ", Email: " + Email + ", points: " + Points;
         }
     }
 }
