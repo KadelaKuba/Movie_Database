@@ -11,13 +11,14 @@ namespace Main.ORM.DAO.Sqls
 {
     public class RatingTable
     {
-        public static String SQL_SELECT = "SELECT * FROM \"Rating\"";
-        public static String SQL_SELECT_MOVIE_ID = "SELECT * FROM \"Rating\" WHERE Movie_ID=@Movie_ID";
-        public static String SQL_SELECT_USER_ID = "SELECT * FROM \"Rating\" WHERE User_ID=@User_ID";
-        public static String SQL_INSERT = "INSERT INTO \"Rating\" VALUES (@Movie_ID, @User_ID, @rate, @dateOfAdd, @comment)";
-        public static String SQL_DELETE_ID = "DELETE FROM \"Rating\" WHERE Movie_ID=@Movie_ID and User_ID=@User_ID";
-        public static String SQL_UPDATE = "UPDATE \"Rating\" SET rate = @rate, " +
+        public static String SQL_SELECT = "SELECT * FROM Rating";
+        public static String SQL_SELECT_MOVIE_ID = "SELECT * FROM Rating WHERE Movie_ID=@Movie_ID";
+        public static String SQL_SELECT_USER_ID = "SELECT * FROM Rating WHERE User_ID=@User_ID";
+        public static String SQL_INSERT = "INSERT INTO Rating VALUES (@Movie_ID, @User_ID, @rate, @dateOfAdd, @comment)";
+        public static String SQL_DELETE_ID = "DELETE FROM Rating WHERE Movie_ID=@Movie_ID and User_ID=@User_ID";
+        public static String SQL_UPDATE = "UPDATE Rating SET rate = @rate, " +
             " dateOfAdd = @dateOfAdd, comment = @comment WHERE Movie_ID=@Movie_ID and User_ID=@User_ID";
+        public static String SQL_ADD_Rating = "EXEC @p_Movie_ID = @p_Movie_ID, @p_UserInfo_ID = vp_UserInfo_ID, @p_rate = @p_rate, @p_comment = @p_comment)";
 
         /// Insert the record.
         public static int Insert(Rating rating, Database pDb = null)
@@ -101,7 +102,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
         /// Select the record.
-        /// <param name="id">user id</param>
         public static Rating SelectMovieID(int Movie_ID, Database pDb = null)
         {
             Database db;
@@ -137,7 +137,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
         /// Select the record.
-        /// <param name="id">user id</param>
         public static Rating SelectUserID(int User_ID, Database pDb = null)
         {
             Database db;
@@ -173,8 +172,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
         /// Delete the record.
-        /// <param name="idUser">user id</param>
-        /// <returns></returns>
         public static int Delete(int User_ID, int Movie_ID, Database pDb = null)
         {
             Database db;
@@ -232,6 +229,23 @@ namespace Main.ORM.DAO.Sqls
                 ratings.Add(rating);
             }
             return ratings;
+        }
+
+        public static int AddRating(int Movie_ID, int UserInfo_ID, decimal rate, DateTime dateOfAdd, string comment) // 9.5 Odstranění notifikací starší 2 let pro trenéra
+        {
+            Database db = new Database();
+            db.Connect();
+            SqlCommand command = db.CreateCommand(SQL_ADD_Rating);
+            command.Parameters.AddWithValue("@p_Movie_ID", Movie_ID);
+            command.Parameters.AddWithValue("@p_UserInfo_ID", UserInfo_ID);
+            command.Parameters.AddWithValue("@rate", rate);
+            command.Parameters.AddWithValue("@dateOfAdd", dateOfAdd);
+            command.Parameters.AddWithValue("@comment", comment);
+
+
+            int ret = db.ExecuteNonQuery(command);
+            db.Close();
+            return ret;
         }
     }
 }

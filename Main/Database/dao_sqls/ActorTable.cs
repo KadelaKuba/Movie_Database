@@ -11,11 +11,11 @@ namespace Main.ORM.DAO.Sqls
 {
     public class ActorTable
     {
-        public static String SQL_SELECT = "SELECT * FROM \"Actor\"";
-        public static String SQL_SELECT_ID = "SELECT * FROM \"Actor\" WHERE ID=@ID";
-        public static String SQL_INSERT = "INSERT INTO \"Actor\" VALUES (@ID, @firstName, @lastName, @nationality, @birthplace, @height)";
-        public static String SQL_DELETE_ID = "DELETE FROM \"Actor\" WHERE ID=@ID";
-        public static String SQL_UPDATE = "UPDATE \"Actor\" SET firstName = @firstName, lastName = @lastName, nationality = @nationality, " +
+        public static String SQL_SELECT = "SELECT * FROM Actor";
+        public static String SQL_SELECT_ID = "SELECT * FROM Actor WHERE ID=@ID";
+        public static String SQL_INSERT = "INSERT INTO Actor VALUES (@ID, @firstName, @lastName, @nationality, @birthplace, @height)";
+        public static String SQL_DELETE_ID = "DELETE FROM Actor WHERE ID=@ID";
+        public static String SQL_UPDATE = "UPDATE Actor SET firstName = @firstName, lastName = @lastName, nationality = @nationality, " +
             "birthplace = @birthplace, height = @height WHERE ID = @ID";
 
         /// Insert the record.

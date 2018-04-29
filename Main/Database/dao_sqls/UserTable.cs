@@ -11,14 +11,19 @@ namespace Main.ORM.DAO.Sqls
 {
     public class UserTable
     {
-        public static String SQL_SELECT = "SELECT * FROM \"UserInfo\"";
-        public static String SQL_SELECT_ID = "SELECT * FROM \"UserInfo\" WHERE ID=@ID";
-        public static String SQL_INSERT = "INSERT INTO \"UserInfo\" VALUES (@ID, @nickname, @firstName, @lastName, @email, " +
+        public static String SQL_SELECT = "SELECT * FROM UserInfo";
+        public static String SQL_SELECT_ID = "SELECT * FROM UserInfo WHERE ID=@ID";
+        public static String SQL_INSERT = "INSERT INTO UserInfo VALUES (@ID, @nickname, @firstName, @lastName, @email, " +
             "@points, @rank, @sex, @country, @shortInfo)";
-        public static String SQL_DELETE_ID = "DELETE FROM \"UserInfo\" WHERE ID=@ID";
-        public static String SQL_UPDATE = "UPDATE \"UserInfo\" SET nickname = @nickname, firstName = @firstName, " +
+        public static String SQL_DELETE_ID = "DELETE FROM UserInfo WHERE ID=@ID";
+        public static String SQL_UPDATE = "UPDATE UserInfo SET nickname = @nickname, firstName = @firstName, " +
             " lastName = @lastName, email = @email, points = @points, rank = @rank, sex = @sex, country = @country, " +
             " shortInfo = @shortInfo WHERE ID=@ID";
+        public static String SQL_NUMBER_OF_MOVIE_RATES = "SELECT U.ID, U.firstName, U.lastName, U.email, Count(R.User_ID)" +
+            "FROM UserInfo U LEFT JOIN Rating R ON R.User_ID = U.ID" +
+            "GROUP BY U.ID, U.firstName, U.lastName, U.email HAVING Count(R.User_ID) >= @numberOfRates";
+        public static String SQL_VALUATE_USER = "EXEC spuUserValuation";
+        public static String SQL_RECALCULATE_POINTS = "EXEC spRecalculatePoints";
 
         /// Insert the record.
         public static int Insert(UserInfo user, Database pDb = null)
@@ -102,7 +107,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
         /// Select the record.
-        /// <param name="id">user id</param>
         public static UserInfo Select(int id, Database pDb = null)
         {
             Database db;
@@ -138,8 +142,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
         /// Delete the record.
-        /// <param name="idUser">user id</param>
-        /// <returns></returns>
         public static int Delete(int idUser, Database pDb = null)
         {
             Database db;
@@ -212,6 +214,42 @@ namespace Main.ORM.DAO.Sqls
                 users.Add(user);
             }
             return users;
+        }
+
+        public static Collection<UserInfo> SelectUsersWithNumberOfRates(int numberOfRates)
+        {
+            Database db = new Database();
+            db.Connect();
+
+            SqlCommand command = db.CreateCommand(SQL_NUMBER_OF_MOVIE_RATES);
+
+            command.Parameters.AddWithValue("@numberOfRates", numberOfRates);
+            SqlDataReader reader = db.Select(command);
+            Collection<UserInfo> users = Read(reader);
+
+            reader.Close();
+            db.Close();
+            return users;
+        }
+
+        public static int UserValuation() // 9.5 Odstranění notifikací starší 2 let pro trenéra
+        {
+            Database db = new Database();
+            db.Connect();
+            SqlCommand command = db.CreateCommand(SQL_VALUATE_USER);
+            int ret = db.ExecuteNonQuery(command);
+            db.Close();
+            return ret;
+        }
+
+        public static int RecalculatePoints() // 9.5 Odstranění notifikací starší 2 let pro trenéra
+        {
+            Database db = new Database();
+            db.Connect();
+            SqlCommand command = db.CreateCommand(SQL_RECALCULATE_POINTS);
+            int ret = db.ExecuteNonQuery(command);
+            db.Close();
+            return ret;
         }
     }
 }

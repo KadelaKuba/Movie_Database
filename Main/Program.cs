@@ -72,7 +72,7 @@ namespace Main
             //------------------------------------------------------------------
             //                          User
             //------------------------------------------------------------------
-            Console.WriteLine("\nUser");
+            Console.WriteLine("\nUser\n");
             UserInfo userInfo = new UserInfo();
             userInfo.Id = 1;
             userInfo.Nickname = "sob28";
@@ -80,7 +80,7 @@ namespace Main
             userInfo.Lastname = "Sobota";
             userInfo.Email = "sobota@seznam.cz";
             userInfo.Points = 42;
-            userInfo.Rank = "Začátečník";
+            userInfo.Rank = "Pokročilý";
             userInfo.Sex = null;
             userInfo.Country = null;
             userInfo.Shortinfo = null;
@@ -90,6 +90,9 @@ namespace Main
             userInfo.Lastname = "Nedela";
             UserTable.Update(userInfo, db);
 
+            UserTable.UserValuation(); // 5.7 Oceneni uzivatelu
+            UserTable.RecalculatePoints(); // 5.8 Prepocet bodu
+
             Collection<UserInfo> users = UserTable.Select();
 
             foreach (UserInfo user in users)
@@ -97,9 +100,12 @@ namespace Main
                 Console.WriteLine(UserTable.Select(user.Id, db).ToString());
             }
 
+            //5.6 Pocet ohodnocenych filmu, nestihl jsem naimplementovat
+
             //------------------------------------------------------------------
             //                          Director
             //------------------------------------------------------------------
+            Console.WriteLine("\nDirector\n");
             Director director = new Director();
             director.Id = 1;
             director.Firstname = "Jakub";
@@ -123,6 +129,7 @@ namespace Main
             //------------------------------------------------------------------
             //                          Movie
             //------------------------------------------------------------------
+            Console.WriteLine("\nMovie\n");
             Movie movie = new Movie();
             movie.Id = 1;
             movie.Title = "Zmizení";
@@ -145,11 +152,13 @@ namespace Main
             foreach (Movie mov in movies)
             {
                 Console.WriteLine(MovieTable.Select(mov.Id, db).ToString());
+                Console.WriteLine("Actor number: " + MovieTable.Select_Actor_Number()); //1.6 Vypis filmu a knim pocet obsazenych hercu
             }
 
             //------------------------------------------------------------------
             //                          Genre
             //------------------------------------------------------------------
+            Console.WriteLine("\nGenre\n");
             Genre genre = new Genre();
             genre.Id = 1;
             genre.Name = "Thriller";
@@ -170,6 +179,7 @@ namespace Main
             //------------------------------------------------------------------
             //                          Actor
             //------------------------------------------------------------------
+            Console.WriteLine("\nActor\n");
             Actor actor = new Actor();
             actor.Id = 1;
             actor.Firstname = "Čeněk";
@@ -193,6 +203,7 @@ namespace Main
             //------------------------------------------------------------------
             //                          Rating
             //------------------------------------------------------------------
+            Console.WriteLine("\nRating\n");
             Rating rating = new Rating();
             rating.Movie_id = 1;
             rating.User_id = 1;
@@ -205,6 +216,8 @@ namespace Main
             rating.Dateofadd = new DateTime(2018, 05, 09);
             RatingTable.Update(rating, db);
 
+            //RatingTable.AddRating(rating.Movie_id, rating.User_id, rating.Rate, rating.Dateofadd, rating.Comment);    6.5 - Nestihl jsem to dodělat
+
             Collection<Rating> ratings = RatingTable.Select();
 
             foreach (Rating rate in ratings)
@@ -215,6 +228,7 @@ namespace Main
             //------------------------------------------------------------------
             //                          RatingHistory
             //------------------------------------------------------------------
+            Console.WriteLine("\nRating History\n");
             RatingHistory ratingHistory = new RatingHistory();
             ratingHistory.Id = 1;
             ratingHistory.Rate = 9.5m;
@@ -238,6 +252,7 @@ namespace Main
             //------------------------------------------------------------------
             //                          MovieGenre
             //------------------------------------------------------------------
+            Console.WriteLine("\nMovie Genre\n");
             MovieGenre movieGenre = new MovieGenre();
             movieGenre.Movie_id = 1;
             movieGenre.Genre_id = 1;
@@ -256,8 +271,9 @@ namespace Main
             }
 
             //------------------------------------------------------------------
-            //                          MovieGenre
+            //                          MovieActor
             //------------------------------------------------------------------
+            Console.WriteLine("\nMovie Actor\n");
             MovieActor movieActor = new MovieActor();
             movieActor.Movie_id = 1;
             movieActor.Actor_id = 1;

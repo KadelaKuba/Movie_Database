@@ -11,14 +11,17 @@ namespace Main.ORM.DAO.Sqls
 {
     public class MovieTable
     {
-        public static String SQL_SELECT = "SELECT * FROM \"Movie\"";
-        public static String SQL_SELECT_ID = "SELECT * FROM \"Movie\" WHERE ID=@ID";
-        public static String SQL_INSERT = "INSERT INTO \"Movie\" VALUES (@ID, @title, @year, @time, @language, " +
+        public static String SQL_SELECT = "SELECT * FROM Movie";
+        public static String SQL_SELECT_ID = "SELECT * FROM Movie WHERE ID=@ID";
+        public static String SQL_INSERT = "INSERT INTO Movie VALUES (@ID, @title, @year, @time, @language, " +
             "@description, @country, @award, @premiere, @Director_ID)";
-        public static String SQL_DELETE_ID = "DELETE FROM \"Movie\" WHERE ID=@ID";
-        public static String SQL_UPDATE = "UPDATE \"Movie\" SET ID = @ID, title = @title, year = @year, " +
+        public static String SQL_DELETE_ID = "DELETE FROM Movie WHERE ID=@ID";
+        public static String SQL_UPDATE = "UPDATE Movie SET ID = @ID, title = @title, year = @year, " +
             " time = @time, language = @language, description = @description, country = @country, award = @award, premiere = @premiere, " +
             " Director_ID = @Director_ID WHERE ID=@ID";
+        public static String SQL_ACTOR_NUMBER = "SELECT M.id, Count(MA.Movie_ID) " +
+            "FROM Movie M LEFT JOIN MovieActor MA ON M.ID = MA.Movie_ID " +
+            "GROUP BY M.id";
 
         /// Insert the record.
         public static int Insert(Movie movie, Database pDb = null)
@@ -102,7 +105,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
         /// Select the record.
-        /// <param name="id">user id</param>
         public static Movie Select(int id, Database pDb = null)
         {
             Database db;
@@ -138,8 +140,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
         /// Delete the record.
-        /// <param name="idUser">user id</param>
-        /// <returns></returns>
         public static int Delete(int id, Database pDb = null)
         {
             Database db;
@@ -206,6 +206,30 @@ namespace Main.ORM.DAO.Sqls
                 Movies.Add(Movie);
             }
             return Movies;
+        }
+
+        public static int Select_Actor_Number()
+        {
+            Database db = new Database();
+            db.Connect();
+
+            SqlCommand command = db.CreateCommand(SQL_ACTOR_NUMBER);
+            SqlDataReader reader = db.Select(command);
+            int count = 0;
+            while (reader.Read())
+            {
+                int i = -1;
+
+                if (!reader.IsDBNull(++i))
+                {
+                    count = reader.GetInt32(++i);
+                }
+
+            }
+            reader.Close();
+            db.Close();
+
+            return count;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Main.ORM
 
         public override string ToString()
         {
-            return "ID: " + Id;
+            return "ID: " + Id + ", Title: " + Title + ", Year: " + Year + ", Time: " + Time;
         }
     }
 }

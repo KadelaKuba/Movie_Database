@@ -16,7 +16,7 @@ namespace Main.ORM
 
         public override string ToString()
         {
-            return "Rate: " + Rate;
+            return "Movie_id: " + Movie_id + ", User_id:" + User_id + ", Rate: " + Rate + " , Comment: " + Comment;
         }
     }
 }

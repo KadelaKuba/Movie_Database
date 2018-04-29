@@ -11,12 +11,12 @@ namespace Main.ORM.DAO.Sqls
 {
     public class MovieActorTable
     {
-        public static String SQL_SELECT = "SELECT * FROM \"MovieActor\"";
-        public static String SQL_SELECT_MOVIE_ID = "SELECT * FROM \"MovieActor\" WHERE Movie_ID=@Movie_ID";
-        public static String SQL_SELECT_ACTOR_ID = "SELECT * FROM \"MovieActor\" WHERE Actor_ID=@Actor_ID";
-        public static String SQL_INSERT = "INSERT INTO \"MovieActor\" VALUES (@Movie_ID, @Actor_ID, @role, @fee)";
-        public static String SQL_DELETE_ID = "DELETE FROM \"MovieActor\" WHERE Movie_ID=@Movie_ID and Actor_ID=@Actor_ID";
-        public static String SQL_UPDATE = "UPDATE \"MovieActor\" SET role = @role, " +
+        public static String SQL_SELECT = "SELECT * FROM MovieActor";
+        public static String SQL_SELECT_MOVIE_ID = "SELECT * FROM MovieActor WHERE Movie_ID=@Movie_ID";
+        public static String SQL_SELECT_ACTOR_ID = "SELECT * FROM MovieActor WHERE Actor_ID=@Actor_ID";
+        public static String SQL_INSERT = "INSERT INTO MovieActor VALUES (@Movie_ID, @Actor_ID, @role, @fee)";
+        public static String SQL_DELETE_ID = "DELETE FROM MovieActor WHERE Movie_ID=@Movie_ID and Actor_ID=@Actor_ID";
+        public static String SQL_UPDATE = "UPDATE MovieActor SET role = @role, " +
             " fee = @fee WHERE Movie_ID=@Movie_ID and Actor_ID=@Actor_ID";
 
         /// Insert the record.

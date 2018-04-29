@@ -11,11 +11,11 @@ namespace Main.ORM.DAO.Sqls
 {
     public class DirectorTable
     {
-        public static String SQL_SELECT = "SELECT * FROM \"Director\"";
-        public static String SQL_SELECT_ID = "SELECT * FROM \"Director\" WHERE ID=@ID";
-        public static String SQL_INSERT = "INSERT INTO \"Director\" VALUES (@ID, @firstName, @lastName, @nationality, @birthplace, @height)";
-        public static String SQL_DELETE_ID = "DELETE FROM \"Director\" WHERE ID=@ID";
-        public static String SQL_UPDATE = "UPDATE \"Director\" SET firstName = @firstName, lastName = @lastName, nationality = @nationality, " +
+        public static String SQL_SELECT = "SELECT * FROM Director";
+        public static String SQL_SELECT_ID = "SELECT * FROM Director WHERE ID=@ID";
+        public static String SQL_INSERT = "INSERT INTO Director VALUES (@ID, @firstName, @lastName, @nationality, @birthplace, @height)";
+        public static String SQL_DELETE_ID = "DELETE FROM Director WHERE ID=@ID";
+        public static String SQL_UPDATE = "UPDATE Director SET firstName = @firstName, lastName = @lastName, nationality = @nationality, " +
             " birthplace = @birthplace, height = @height WHERE ID = @ID";
 
         /// Insert the record.

@@ -11,11 +11,11 @@ namespace Main.ORM.DAO.Sqls
 {
     class RatingHistoryTable
     {
-        public static String SQL_SELECT = "SELECT * FROM \"RatingHistory\"";
-        public static String SQL_SELECT_ID = "SELECT * FROM \"RatingHistory\" WHERE ID=@ID";
-        public static String SQL_INSERT = "INSERT INTO \"RatingHistory\" VALUES (@ID, @rate, @dateOfChange, @comment, @Rating_movie_id, @Rating_userinfo_id)";
-        public static String SQL_DELETE_ID = "DELETE FROM \"RatingHistory\" WHERE ID=@ID";
-        public static String SQL_UPDATE = "UPDATE \"RatingHistory\" SET rate = @rate, " +
+        public static String SQL_SELECT = "SELECT * FROM RatingHistory";
+        public static String SQL_SELECT_ID = "SELECT * FROM RatingHistory WHERE ID=@ID";
+        public static String SQL_INSERT = "INSERT INTO RatingHistory VALUES (@ID, @rate, @dateOfChange, @comment, @Rating_movie_id, @Rating_userinfo_id)";
+        public static String SQL_DELETE_ID = "DELETE FROM RatingHistory WHERE ID=@ID";
+        public static String SQL_UPDATE = "UPDATE RatingHistory SET rate = @rate, " +
             " dateOfChange = @dateOfChange, comment = @comment, Rating_movie_id = @Rating_movie_id, Rating_userinfo_id = @Rating_userinfo_id WHERE ID=@ID";
 
         /// Insert the record.

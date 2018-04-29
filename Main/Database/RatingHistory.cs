@@ -12,7 +12,7 @@ namespace Main.ORM
         public int Rating_userinfo_id { get; set; }
         public override string ToString()
         {
-            return "Rate: " + Rate;
+            return "Movie_id: " + Rating_movie_id + ", User_id:" + Rating_userinfo_id + ", Rate: " + Rate + " , Comment: " + Comment;
         }
     }
 }

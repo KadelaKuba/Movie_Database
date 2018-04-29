@@ -11,11 +11,11 @@ namespace Main.ORM.DAO.Sqls
 {
     public class GenreTable
     {
-        public static String SQL_SELECT = "SELECT * FROM \"Genre\"";
-        public static String SQL_SELECT_ID = "SELECT * FROM \"Genre\" WHERE ID=@ID";
-        public static String SQL_INSERT = "INSERT INTO \"Genre\" VALUES (@ID, @name, @description)";
-        public static String SQL_DELETE_ID = "DELETE FROM \"Genre\" WHERE ID=@ID";
-        public static String SQL_UPDATE = "UPDATE \"Genre\" SET name = @name, description = @description";
+        public static String SQL_SELECT = "SELECT * FROM Genre";
+        public static String SQL_SELECT_ID = "SELECT * FROM Genre WHERE ID=@ID";
+        public static String SQL_INSERT = "INSERT INTO Genre VALUES (@ID, @name, @description)";
+        public static String SQL_DELETE_ID = "DELETE FROM Genre WHERE ID=@ID";
+        public static String SQL_UPDATE = "UPDATE Genre SET name = @name, description = @description";
 
         /// Insert the record.
         public static int Insert(Genre genre, Database pDb = null)
