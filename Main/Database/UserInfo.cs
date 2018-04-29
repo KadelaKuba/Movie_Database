@@ -18,5 +18,10 @@ namespace Main.ORM
         public string Sex { get; set; }
         public string Country { get; set; }
         public string Shortinfo { get; set; }
+
+        public override string ToString()
+        {
+            return "ID: " + Id + " Jméno a příjmeni:  " + Firstname + " " + Lastname + " Email: " + Email + " points " + Points;
+        }
     }
 }

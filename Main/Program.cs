@@ -1,6 +1,7 @@
 ﻿using System;
 using Main.ORM;
 using Main.ORM.DAO.Sqls;
+using System.Collections.ObjectModel;
 
 namespace Main
 {
@@ -11,23 +12,29 @@ namespace Main
             Database db = new Database();
             db.Connect();
 
-            UserInfo u = new UserInfo();
-            u.Id = 6;
-            u.Nickname = "son28";
-            u.Firstname = "Tonda";
-            u.Lastname = "Sobota";
-            u.Email = "Fialová 8, Ostrava, 70833";
-            u.Points = 42;
-            u.Rank = "Začátčník";
-            u.Sex = null;
-            u.Country = null;
-            u.Shortinfo = null;
+            UserInfo userInfo = new UserInfo();
+            userInfo.Nickname = "sob28";
+            userInfo.Firstname = "Tonda";
+            userInfo.Lastname = "Sobota";
+            userInfo.Email = "sobota@seznam.cz";
+            userInfo.Points = 42;
+            userInfo.Rank = "Začátečník";
+            userInfo.Sex = null;
+            userInfo.Country = null;
+            userInfo.Shortinfo = null;
 
-            UserTable.Insert(u, db);
+            UserTable.Insert(userInfo, db);
 
-            int count1 = UserTable.Select(db).Count;
+            userInfo.Lastname = "Nedela";
+            UserTable.Update(userInfo, db);
 
-            Console.WriteLine("#C: " + count1);
+            Collection<UserInfo> users = UserTable.Select();
+
+            foreach (UserInfo user in users)
+            {
+                Console.WriteLine(UserTable.Select(user.Id, db).ToString());
+                //UserTable.Delete(user.Id);
+            }
 
             db.Close();
         }
