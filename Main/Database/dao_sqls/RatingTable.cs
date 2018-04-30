@@ -231,7 +231,6 @@ namespace Main.ORM.DAO.Sqls
             Database db = new Database();
             db.Connect();
             SqlCommand command = db.CreateCommand(SQL_ADD_Rating);
-            Console.WriteLine(command.CommandText);
             command.Parameters.AddWithValue("@Movie_ID", Movie_ID);
             command.Parameters.AddWithValue("@UserInfo_ID", UserInfo_ID);
             command.Parameters.AddWithValue("@rate", rate);

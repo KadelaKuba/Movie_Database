@@ -16,7 +16,7 @@ namespace Main
             Console.WriteLine("------------------------------------------------------------------");
             DeleteAllDataFromDatabase();
 
-            Console.WriteLine("\n                          User                                  ");
+            Console.WriteLine("\n\n                           User                               ");
             Console.WriteLine("------------------------------------------------------------------");
             UserInfo userInfo = new UserInfo();
             userInfo.Id = 1;
@@ -47,10 +47,10 @@ namespace Main
 
             foreach (UserInfo user in UserTable.SelectUsersWithNumberOfRates(0)) //5.6 Pocet ohodnocených filmu větší než parametr
             {
-                Console.WriteLine("User ID: " + user.Id + "Number of rates: " + user.NumberOfRates);
+                Console.WriteLine("User ID: " + user.Id + ", Number of rates: " + user.NumberOfRates);
             }
 
-            Console.WriteLine("\n                         Director                               ");
+            Console.WriteLine("\n\n                          Director                            ");
             Console.WriteLine("------------------------------------------------------------------");
             Director director = new Director();
             director.Id = 1;
@@ -72,7 +72,7 @@ namespace Main
                 Console.WriteLine(DirectorTable.Select(dir.Id, db).ToString());
             }
 
-            Console.WriteLine("\n                           Movie                                ");
+            Console.WriteLine("\n\n                            Movie                             ");
             Console.WriteLine("------------------------------------------------------------------");
             Movie movie = new Movie();
             movie.Id = 1;
@@ -99,7 +99,7 @@ namespace Main
                 Console.WriteLine("Actor number: " + MovieTable.Select_Actor_Number()); //1.6 Výpis filmů a k nim počet obsazených herců
             }
 
-            Console.WriteLine("\n                          Genre                                 ");
+            Console.WriteLine("\n\n                           Genre                              ");
             Console.WriteLine("------------------------------------------------------------------");
             Genre genre = new Genre();
             genre.Id = 1;
@@ -118,7 +118,7 @@ namespace Main
                 Console.WriteLine(GenreTable.Select(gen.Id, db).ToString());
             }
 
-            Console.WriteLine("\n                          Actor                                 ");
+            Console.WriteLine("\n\n                           Actor                              ");
             Console.WriteLine("------------------------------------------------------------------");
             Actor actor = new Actor();
             actor.Id = 1;
@@ -140,7 +140,7 @@ namespace Main
                 Console.WriteLine(ActorTable.Select(act.Id, db).ToString());
             }
 
-            Console.WriteLine("\n                          Rating                                ");
+            Console.WriteLine("\n\n                          Rating                              ");
             Console.WriteLine("------------------------------------------------------------------");
             Rating rating = new Rating();
             rating.Movie_id = 1;
@@ -163,7 +163,7 @@ namespace Main
                 Console.WriteLine(RatingTable.SelectMovieID(rate.Movie_id, db).ToString());
             }
 
-            Console.WriteLine("\n                       Rating History                           ");
+            Console.WriteLine("\n\n                        Rating History                        ");
             Console.WriteLine("------------------------------------------------------------------");
             RatingHistory ratingHistory = new RatingHistory();
             ratingHistory.Id = 1;
@@ -185,7 +185,7 @@ namespace Main
                 Console.WriteLine(RatingHistoryTable.Select(ratingHist.Id, db).ToString());
             }
 
-            Console.WriteLine("\n                        Movie Genre                             ");
+            Console.WriteLine("\n\n                         Movie Genre                          ");
             Console.WriteLine("------------------------------------------------------------------");
             MovieGenre movieGenre = new MovieGenre();
             movieGenre.Movie_id = 1;
@@ -204,7 +204,7 @@ namespace Main
                 Console.WriteLine(MovieGenreTable.SelectMovieId(movieGen.Movie_id, db).ToString());
             }
 
-            Console.WriteLine("\n                        Movie Actor                             ");
+            Console.WriteLine("\n\n                        Movie Actor                           ");
             Console.WriteLine("------------------------------------------------------------------");
             MovieActor movieActor = new MovieActor();
             movieActor.Movie_id = 1;
@@ -224,6 +224,7 @@ namespace Main
                 Console.WriteLine(MovieActorTable.SelectMovieId(movieAct.Movie_id, db).ToString());
             }
 
+            Console.WriteLine("\n\n");
             db.Close();
         }
 
