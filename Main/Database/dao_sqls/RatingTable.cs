@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace Main.ORM.DAO.Sqls
@@ -18,7 +13,7 @@ namespace Main.ORM.DAO.Sqls
         public static String SQL_DELETE_ID = "DELETE FROM Rating WHERE Movie_ID=@Movie_ID and User_ID=@User_ID";
         public static String SQL_UPDATE = "UPDATE Rating SET rate = @rate, " +
             " dateOfAdd = @dateOfAdd, comment = @comment WHERE Movie_ID=@Movie_ID and User_ID=@User_ID";
-        public static String SQL_ADD_Rating = "EXEC @p_Movie_ID = @p_Movie_ID, @p_UserInfo_ID = vp_UserInfo_ID, @p_rate = @p_rate, @p_comment = @p_comment)";
+        public static String SQL_ADD_Rating = "EXEC spAddRating @Movie_ID, @UserInfo_ID, @rate, @comment";
 
         /// Insert the record.
         public static int Insert(Rating rating, Database pDb = null)
@@ -231,17 +226,18 @@ namespace Main.ORM.DAO.Sqls
             return ratings;
         }
 
-        public static int AddRating(int Movie_ID, int UserInfo_ID, decimal rate, DateTime dateOfAdd, string comment) // 9.5 Odstranění notifikací starší 2 let pro trenéra
+        public static int AddRating(int Movie_ID, int UserInfo_ID, decimal rate, string comment)
         {
             Database db = new Database();
             db.Connect();
             SqlCommand command = db.CreateCommand(SQL_ADD_Rating);
-            command.Parameters.AddWithValue("@p_Movie_ID", Movie_ID);
-            command.Parameters.AddWithValue("@p_UserInfo_ID", UserInfo_ID);
+            Console.WriteLine(command.CommandText);
+            command.Parameters.AddWithValue("@Movie_ID", Movie_ID);
+            command.Parameters.AddWithValue("@UserInfo_ID", UserInfo_ID);
             command.Parameters.AddWithValue("@rate", rate);
-            command.Parameters.AddWithValue("@dateOfAdd", dateOfAdd);
             command.Parameters.AddWithValue("@comment", comment);
 
+            //PrepareCommand(command, rating);
 
             int ret = db.ExecuteNonQuery(command);
             db.Close();

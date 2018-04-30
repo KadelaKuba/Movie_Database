@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace Main.ORM.DAO.Sqls
@@ -19,9 +14,9 @@ namespace Main.ORM.DAO.Sqls
         public static String SQL_UPDATE = "UPDATE UserInfo SET nickname = @nickname, firstName = @firstName, " +
             " lastName = @lastName, email = @email, points = @points, rank = @rank, sex = @sex, country = @country, " +
             " shortInfo = @shortInfo WHERE ID=@ID";
-        public static String SQL_NUMBER_OF_MOVIE_RATES = "SELECT U.ID, U.firstName, U.lastName, U.email, Count(R.User_ID)" +
-            "FROM UserInfo U LEFT JOIN Rating R ON R.User_ID = U.ID" +
-            "GROUP BY U.ID, U.firstName, U.lastName, U.email HAVING Count(R.User_ID) >= @numberOfRates";
+        public static String SQL_NUMBER_OF_MOVIE_RATES = "SELECT U.ID, Count(R.User_ID) AS pocet " +
+            "FROM UserInfo U LEFT JOIN Rating R ON R.User_ID = U.ID " +
+            "GROUP BY U.ID HAVING Count(R.User_ID) >= @numberOfRates";
         public static String SQL_VALUATE_USER = "EXEC spuUserValuation";
         public static String SQL_RECALCULATE_POINTS = "EXEC spRecalculatePoints";
 
@@ -222,17 +217,32 @@ namespace Main.ORM.DAO.Sqls
             db.Connect();
 
             SqlCommand command = db.CreateCommand(SQL_NUMBER_OF_MOVIE_RATES);
-
             command.Parameters.AddWithValue("@numberOfRates", numberOfRates);
             SqlDataReader reader = db.Select(command);
-            Collection<UserInfo> users = Read(reader);
+            Collection<UserInfo> users = ReadUsersWithNumberOfRates(reader);
 
             reader.Close();
             db.Close();
             return users;
         }
 
-        public static int UserValuation() // 9.5 Odstranění notifikací starší 2 let pro trenéra
+        private static Collection<UserInfo> ReadUsersWithNumberOfRates(SqlDataReader reader)
+        {
+            Collection<UserInfo> users = new Collection<UserInfo>();
+
+            while (reader.Read())
+            {
+                int i = -1;
+                UserInfo user = new UserInfo();
+                user.Id = reader.GetInt32(++i);
+                user.NumberOfRates = reader.GetInt32(++i);
+
+                users.Add(user);
+            }
+            return users;
+        }
+
+        public static int UserValuation()
         {
             Database db = new Database();
             db.Connect();
@@ -242,7 +252,7 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        public static int RecalculatePoints() // 9.5 Odstranění notifikací starší 2 let pro trenéra
+        public static int RecalculatePoints() 
         {
             Database db = new Database();
             db.Connect();

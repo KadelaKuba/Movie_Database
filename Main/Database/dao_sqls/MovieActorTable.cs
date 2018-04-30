@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace Main.ORM.DAO.Sqls
@@ -101,7 +96,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
         /// Select the record.
-        /// <param name="id">user id</param>
         public static MovieActor SelectMovieId(int Movie_ID, Database pDb = null)
         {
             Database db;
@@ -137,7 +131,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
         /// Select the record.
-        /// <param name="id">user id</param>
         public static MovieActor SelectActorID(int Actor_ID, Database pDb = null)
         {
             Database db;
@@ -173,8 +166,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
         /// Delete the record.
-        /// <param name="idUser">user id</param>
-        /// <returns></returns>
         public static int Delete(int Actor_ID, int Movie_ID, Database pDb = null)
         {
             Database db;
