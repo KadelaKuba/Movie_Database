@@ -2,12 +2,27 @@
 using Main.ORM;
 using Main.ORM.DAO.Sqls;
 using System.Collections.ObjectModel;
+using System.Windows.Forms;
 
 namespace Main
 {
     class Program
     {
         static void Main(string[] args)
+        {
+            //TryAllOperationsOfModel();
+
+            Database db = new Database();
+            db.Connect();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainMenu());
+
+            db.Close();
+
+        }
+
+        public static void TryAllOperationsOfModel()
         {
             Database db = new Database();
             db.Connect();
@@ -58,7 +73,7 @@ namespace Main
             director.Lastname = "Novák";
             director.Nationality = "CZ";
             director.Birthplace = "Brno";
-            director.Height = 1.5m;            
+            director.Height = 1.5m;
 
             DirectorTable.Insert(director, db);
 
@@ -154,7 +169,7 @@ namespace Main
             rating.Dateofadd = new DateTime(2018, 05, 09);
             RatingTable.Update(rating, db);
 
-            RatingTable.AddRating(2,2, rating.Rate, rating.Comment);   // 6.5 Přidání hodnocení
+            RatingTable.AddRating(2, 2, rating.Rate, rating.Comment);   // 6.5 Přidání hodnocení
 
             Collection<Rating> ratings = RatingTable.Select();
 

@@ -240,3 +240,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/Main/Form1.resx
+/Main/Form1.Designer.cs
+/Main/Form1.cs
