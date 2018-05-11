@@ -16,7 +16,6 @@ namespace Main.ORM.DAO.Sqls
         public static String SQL_UPDATE = "UPDATE Actor SET firstName = @firstName, lastName = @lastName, nationality = @nationality, " +
             "birthplace = @birthplace, height = @height WHERE ID = @ID";
 
-        /// Insert the record.
         public static int Insert(Actor actor, Database pDb = null)
         {
             Database db;
@@ -42,7 +41,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        /// Update the record.
         public static int Update(Actor actor, Database pDb = null)
         {
             Database db;
@@ -69,7 +67,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
 
-        /// Select the records.
         public static Collection<Actor> Select(Database pDb = null)
         {
             Database db;
@@ -97,7 +94,6 @@ namespace Main.ORM.DAO.Sqls
             return actors;
         }
 
-        /// Select the record.
         public static Actor Select(int ID, Database pDb = null)
         {
             Database db;
@@ -132,7 +128,6 @@ namespace Main.ORM.DAO.Sqls
             return actor;
         }
 
-        /// Select the records.
         public static Collection<Actor> SelectActorsForMovie(int Movie_ID, Database pDb = null)
         {
             Database db;
@@ -148,7 +143,7 @@ namespace Main.ORM.DAO.Sqls
 
             SqlCommand command = db.CreateCommand(SQL_SELECT_ACTORS_FOR_MOVIE);
             command.Parameters.AddWithValue("@Movie_ID", Movie_ID);
-            //Console.WriteLine(command.CommandText);
+
             SqlDataReader reader = db.Select(command);
 
             Collection<Actor> actors = Read(reader);
@@ -163,7 +158,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
 
-        /// Delete the record.
         public static int Delete(int ID, Database pDb = null)
         {
             Database db;
@@ -190,7 +184,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        ///  Prepare a command.
         private static void PrepareCommand(SqlCommand command, Actor actor)
         {
             command.Parameters.AddWithValue("@ID", actor.Id);

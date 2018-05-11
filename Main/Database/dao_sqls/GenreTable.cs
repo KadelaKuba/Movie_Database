@@ -15,7 +15,6 @@ namespace Main.ORM.DAO.Sqls
         public static String SQL_DELETE_ID = "DELETE FROM Genre WHERE ID=@ID";
         public static String SQL_UPDATE = "UPDATE Genre SET name = @name, description = @description";
 
-        /// Insert the record.
         public static int Insert(Genre genre, Database pDb = null)
         {
             Database db;
@@ -41,7 +40,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        /// Update the record.
         public static int Update(Genre genre, Database pDb = null)
         {
             Database db;
@@ -68,7 +66,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
 
-        /// Select the records.
         public static Collection<Genre> Select(Database pDb = null)
         {
             Database db;
@@ -96,7 +93,6 @@ namespace Main.ORM.DAO.Sqls
             return genres;
         }
 
-        /// Select the record.
         public static Genre Select(int ID, Database pDb = null)
         {
             Database db;
@@ -131,7 +127,6 @@ namespace Main.ORM.DAO.Sqls
             return genre;
         }
 
-        /// Select the records.
         public static Collection<Genre> SelectGenresForMovie(int Movie_ID, Database pDb = null)
         {
             Database db;
@@ -161,7 +156,6 @@ namespace Main.ORM.DAO.Sqls
             return genres;
         }
 
-        /// Delete the record.
         public static int Delete(int ID, Database pDb = null)
         {
             Database db;
@@ -188,7 +182,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        ///  Prepare a command.
         private static void PrepareCommand(SqlCommand command, Genre genre)
         {
             command.Parameters.AddWithValue("@ID", genre.Id);

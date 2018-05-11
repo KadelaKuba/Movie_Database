@@ -14,7 +14,6 @@ namespace Main.ORM.DAO.Sqls
         public static String SQL_UPDATE = "UPDATE MovieActor SET role = @role, " +
             " fee = @fee WHERE Movie_ID=@Movie_ID and Actor_ID=@Actor_ID";
 
-        /// Insert the record.
         public static int Insert(MovieActor movieActor, Database pDb = null)
         {
             Database db;
@@ -40,7 +39,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        /// Update the record.
         public static int Update(MovieActor movieActor, Database pDb = null)
         {
             Database db;
@@ -67,7 +65,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
 
-        /// Select the records.
         public static Collection<MovieActor> Select(Database pDb = null)
         {
             Database db;
@@ -95,7 +92,6 @@ namespace Main.ORM.DAO.Sqls
             return movieActor;
         }
 
-        /// Select the record.
         public static MovieActor SelectMovieId(int Movie_ID, Database pDb = null)
         {
             Database db;
@@ -130,7 +126,6 @@ namespace Main.ORM.DAO.Sqls
             return movieActor;
         }
 
-        /// Select the record.
         public static MovieActor SelectActorID(int Actor_ID, Database pDb = null)
         {
             Database db;
@@ -165,7 +160,6 @@ namespace Main.ORM.DAO.Sqls
             return movieActor;
         }
 
-        /// Delete the record.
         public static int Delete(int Actor_ID, int Movie_ID, Database pDb = null)
         {
             Database db;
@@ -193,7 +187,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        ///  Prepare a command.
         private static void PrepareCommand(SqlCommand command, MovieActor movieActor)
         {
             command.Parameters.AddWithValue("@Movie_ID", movieActor.Movie_id);

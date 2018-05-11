@@ -16,7 +16,6 @@ namespace Main.ORM.DAO.Sqls
             " dateOfAdd = @dateOfAdd, comment = @comment WHERE Movie_ID=@Movie_ID and User_ID=@User_ID";
         public static String SQL_ADD_Rating = "EXEC spAddRating @Movie_ID, @User_ID, @rate, @comment";
 
-        /// Insert the record.
         public static int Insert(Rating rating, Database pDb = null)
         {
             Database db;
@@ -42,7 +41,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        /// Update the record.
         public static int Update(Rating rating, Database pDb = null)
         {
             Database db;
@@ -69,7 +67,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
 
-        /// Select the records.
         public static Collection<Rating> Select(Database pDb = null)
         {
             Database db;
@@ -97,7 +94,6 @@ namespace Main.ORM.DAO.Sqls
             return ratings;
         }
 
-        /// Select the record.
         public static Rating SelectMovieID(int Movie_ID, Database pDb = null)
         {
             Database db;
@@ -132,7 +128,6 @@ namespace Main.ORM.DAO.Sqls
             return Rating;
         }
 
-        /// Select the record.
         public static Rating SelectUserID(int User_ID, Database pDb = null)
         {
             Database db;
@@ -167,7 +162,6 @@ namespace Main.ORM.DAO.Sqls
             return Rating;
         }
 
-        /// Delete the record.
         public static int Delete(int User_ID, int Movie_ID, Database pDb = null)
         {
             Database db;
@@ -195,7 +189,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        /// Delete the record.
         public static int DeleteByUser(int User_ID, Database pDb = null)
         {
             Database db;
@@ -222,7 +215,7 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        ///  Prepare a command.
+
         private static void PrepareCommand(SqlCommand command, Rating Rating)
         {
             command.Parameters.AddWithValue("@Movie_ID", Rating.Movie_id);
@@ -263,11 +256,6 @@ namespace Main.ORM.DAO.Sqls
             command.Parameters.AddWithValue("@User_ID", UserInfo_ID);
             command.Parameters.AddWithValue("@rate", rate);
             command.Parameters.AddWithValue("@comment", comment);
-
-            Console.WriteLine(Movie_ID);
-            Console.WriteLine(UserInfo_ID);
-            Console.WriteLine(rate);
-            Console.WriteLine(comment);
 
             int ret = db.ExecuteNonQuery(command);
             db.Close();

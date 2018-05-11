@@ -20,7 +20,6 @@ namespace Main.ORM.DAO.Sqls
         public static String SQL_VALUATE_USER = "EXEC spuUserValuation";
         public static String SQL_RECALCULATE_POINTS = "EXEC spRecalculatePoints";
 
-        /// Insert the record.
         public static int Insert(UserInfo user, Database pDb = null)
         {
             Database db;
@@ -46,7 +45,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        /// Update the record.
         public static int Update(UserInfo user, Database pDb = null)
         {
             Database db;
@@ -73,7 +71,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
 
-        /// Select the records.
         public static Collection<UserInfo> Select(Database pDb = null)
         {
             Database db;
@@ -101,7 +98,6 @@ namespace Main.ORM.DAO.Sqls
             return users;
         }
 
-        /// Select the record.
         public static UserInfo Select(int id, Database pDb = null)
         {
             Database db;
@@ -136,7 +132,6 @@ namespace Main.ORM.DAO.Sqls
             return User;
         }
 
-        /// Delete the record.
         public static int Delete(int idUser, Database pDb = null)
         {
             Database db;
@@ -162,7 +157,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        ///  Prepare a command.
         private static void PrepareCommand(SqlCommand command, UserInfo User)
         {
             command.Parameters.AddWithValue("@ID", User.Id);

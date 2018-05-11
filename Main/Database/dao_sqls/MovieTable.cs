@@ -20,7 +20,6 @@ namespace Main.ORM.DAO.Sqls
             "FROM Movie M LEFT JOIN MovieActor MA ON M.ID = MA.Movie_ID " +
             "GROUP BY M.id";
 
-        /// Insert the record.
         public static int Insert(Movie movie, Database pDb = null)
         {
             Database db;
@@ -46,7 +45,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        /// Update the record.
         public static int Update(Movie movie, Database pDb = null)
         {
             Database db;
@@ -73,7 +71,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
 
-        /// Select the records.
         public static Collection<Movie> Select(Database pDb = null)
         {
             Database db;
@@ -101,7 +98,6 @@ namespace Main.ORM.DAO.Sqls
             return movies;
         }
 
-        /// Select the record.
         public static Movie Select(int id, Database pDb = null)
         {
             Database db;
@@ -136,7 +132,6 @@ namespace Main.ORM.DAO.Sqls
             return Movie;
         }
 
-        /// Delete the record.
         public static int Delete(int id, Database pDb = null)
         {
             Database db;
@@ -162,7 +157,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        ///  Prepare a command.
         private static void PrepareCommand(SqlCommand command, Movie Movie)
         {
             command.Parameters.AddWithValue("@ID", Movie.Id);

@@ -13,7 +13,6 @@ namespace Main.ORM.DAO.Sqls
         public static String SQL_DELETE_ID = "DELETE FROM MovieGenre WHERE Movie_ID=@Movie_ID and Genre_ID=@Genre_ID";
         public static String SQL_UPDATE = "UPDATE MovieGenre SET dateOfAdd = @dateOfAdd WHERE Movie_ID = @Movie_ID and Genre_ID = @Genre_ID";
 
-        /// Insert the record.
         public static int Insert(MovieGenre movieGenre, Database pDb = null)
         {
             Database db;
@@ -39,7 +38,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        /// Update the record.
         public static int Update(MovieGenre movieGenre, Database pDb = null)
         {
             Database db;
@@ -66,7 +64,6 @@ namespace Main.ORM.DAO.Sqls
         }
 
 
-        /// Select the records.
         public static Collection<MovieGenre> Select(Database pDb = null)
         {
             Database db;
@@ -94,7 +91,6 @@ namespace Main.ORM.DAO.Sqls
             return movieGenres;
         }
 
-        /// Select the record.
         public static MovieGenre SelectMovieId(int Movie_ID, Database pDb = null)
         {
             Database db;
@@ -129,7 +125,6 @@ namespace Main.ORM.DAO.Sqls
             return movieGenre;
         }
 
-        /// Select the record.
         public static MovieGenre SelectGenreId(int Genre_ID, Database pDb = null)
         {
             Database db;
@@ -164,7 +159,6 @@ namespace Main.ORM.DAO.Sqls
             return movieGenre;
         }
 
-        /// Delete the record.
         public static int Delete(int Movie_ID, int Genre_ID, Database pDb = null)
         {
             Database db;
@@ -192,7 +186,6 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
-        ///  Prepare a command.
         private static void PrepareCommand(SqlCommand command, MovieGenre movieGenre)
         {
             command.Parameters.AddWithValue("@Movie_ID", movieGenre.Movie_id);
