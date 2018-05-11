@@ -19,14 +19,14 @@ namespace Main
 
         private void MovieDetail_Load(object sender, EventArgs e)
         {
-            RatingTable.DeleteByUser(UserInfo.TEST_USER_ID);
+            //RatingTable.DeleteByUser(UserInfo.TEST_USER_ID);
             PreviousButton.Enabled = false;
             index = 0;
             movies = MovieTable.Select();
-            SetLabelsForMovie();
+            SetDataForMovie();
         }
 
-        public void SetLabelsForMovie()
+        public void SetDataForMovie()
         {
             NameLabel.Text = movies[index].Title.ToString();
             YearLabel.Text = movies[index].Year.ToString();
@@ -41,6 +41,7 @@ namespace Main
             setActorsLabel(movies[index].Id);
             setDirectorLabel(movies[index].Id);
             setGenresLabel(movies[index].Id);
+            setMyRatingLabel(movies[index].Id);
         }
 
         public void setActorsLabel(int Movie_ID)
@@ -99,11 +100,24 @@ namespace Main
             GenresLabel.Text = GenresString;
         }
 
+        public void setMyRatingLabel(int Movie_ID)
+        {
+            if (RatingTable.SelectByUserIdAndMovieId(UserInfo.TEST_USER_ID, Movie_ID) == null)
+            {
+                MyRating.Text = "Dosud nehodnoceno";
+            }
+            else
+            {
+                MyRating.Text = RatingTable.SelectByUserIdAndMovieId(UserInfo.TEST_USER_ID, Movie_ID).Rate.ToString("0.##");
+            }
+            
+        }
+
         private void NextButton_Click(object sender, EventArgs e)
         {
             AddRating.Enabled = true;
             index++;
-            SetLabelsForMovie();
+            SetDataForMovie();
             PreviousButton.Enabled = true;
 
             if (movies.Count() - 1 == index)
@@ -120,7 +134,7 @@ namespace Main
         {
             AddRating.Enabled = true;
             index--;
-            SetLabelsForMovie();
+            SetDataForMovie();
             NextButton.Enabled = true;
 
             if (index == 0)
@@ -137,6 +151,17 @@ namespace Main
         {
             RatingTable.AddRating(movies[index].Id, UserInfo.TEST_USER_ID, Rating.Value, CommentTextBox.Text);
             AddRating.Enabled = false;
+            setMyRatingLabel(movies[index].Id);
+        }
+
+        private void DescriptionLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Main.ORM.DAO.Sqls
         public static String SQL_SELECT = "SELECT * FROM Rating";
         public static String SQL_SELECT_MOVIE_ID = "SELECT * FROM Rating WHERE Movie_ID=@Movie_ID";
         public static String SQL_SELECT_USER_ID = "SELECT * FROM Rating WHERE User_ID=@User_ID";
+        public static String SQL_SELECT_BY_USER_ID_AND_MOVIE_ID = "SELECT * FROM Rating WHERE User_ID=@User_ID AND Movie_ID=@Movie_ID";
         public static String SQL_INSERT = "INSERT INTO Rating VALUES (@Movie_ID, @User_ID, @rate, @dateOfAdd, @comment)";
         public static String SQL_DELETE_ID = "DELETE FROM Rating WHERE Movie_ID=@Movie_ID and User_ID=@User_ID";
         public static String SQL_DELETE_BY_USER_ID = "DELETE FROM Rating WHERE User_ID=@User_ID";
@@ -144,6 +145,41 @@ namespace Main.ORM.DAO.Sqls
             SqlCommand command = db.CreateCommand(SQL_SELECT_USER_ID);
 
             command.Parameters.AddWithValue("@User_ID", User_ID);
+            SqlDataReader reader = db.Select(command);
+
+            Collection<Rating> Ratings = Read(reader);
+            Rating Rating = null;
+            if (Ratings.Count == 1)
+            {
+                Rating = Ratings[0];
+            }
+            reader.Close();
+
+            if (pDb == null)
+            {
+                db.Close();
+            }
+
+            return Rating;
+        }
+
+        public static Rating SelectByUserIdAndMovieId(int User_ID, int Movie_ID, Database pDb = null)
+        {
+            Database db;
+            if (pDb == null)
+            {
+                db = new Database();
+                db.Connect();
+            }
+            else
+            {
+                db = (Database)pDb;
+            }
+
+            SqlCommand command = db.CreateCommand(SQL_SELECT_BY_USER_ID_AND_MOVIE_ID);
+
+            command.Parameters.AddWithValue("@User_ID", User_ID);
+            command.Parameters.AddWithValue("@Movie_ID", Movie_ID);
             SqlDataReader reader = db.Select(command);
 
             Collection<Rating> Ratings = Read(reader);
