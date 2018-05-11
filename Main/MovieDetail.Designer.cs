@@ -28,28 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MovieDetail));
             this.label16 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.Rating = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.CommentTextBox = new System.Windows.Forms.TextBox();
+            this.AddRating = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.DescriptionLabel = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.AvgRatingLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.NameLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.GenresLabel = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.DirectorLabel = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.ActorsLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.AwardCheckBox = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -61,16 +64,10 @@
             this.CountryLabel = new System.Windows.Forms.Label();
             this.YearLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.l = new System.ServiceProcess.ServiceController();
             this.NextButton = new System.Windows.Forms.Button();
             this.PreviousButton = new System.Windows.Forms.Button();
-            this.ActorsLabel = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.DirectorLabel = new System.Windows.Forms.Label();
-            this.GenresLabel = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Rating)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -106,12 +103,12 @@
             this.label13.TabIndex = 0;
             this.label13.Text = "Moje hodnocení";
             // 
-            // numericUpDown1
+            // Rating
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(74, 44);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 5;
+            this.Rating.Location = new System.Drawing.Point(74, 44);
+            this.Rating.Name = "Rating";
+            this.Rating.Size = new System.Drawing.Size(120, 20);
+            this.Rating.TabIndex = 5;
             // 
             // label5
             // 
@@ -131,32 +128,33 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Hodnocení";
             // 
-            // textBox3
+            // CommentTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(241, 26);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(462, 55);
-            this.textBox3.TabIndex = 2;
+            this.CommentTextBox.Location = new System.Drawing.Point(241, 26);
+            this.CommentTextBox.Multiline = true;
+            this.CommentTextBox.Name = "CommentTextBox";
+            this.CommentTextBox.Size = new System.Drawing.Size(462, 55);
+            this.CommentTextBox.TabIndex = 2;
             // 
-            // button1
+            // AddRating
             // 
-            this.button1.Location = new System.Drawing.Point(724, 41);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Vložit";
-            this.button1.UseVisualStyleBackColor = true;
+            this.AddRating.Location = new System.Drawing.Point(724, 41);
+            this.AddRating.Name = "AddRating";
+            this.AddRating.Size = new System.Drawing.Size(75, 23);
+            this.AddRating.TabIndex = 0;
+            this.AddRating.Text = "Vložit";
+            this.AddRating.UseVisualStyleBackColor = true;
+            this.AddRating.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.numericUpDown1);
+            this.panel5.Controls.Add(this.Rating);
             this.panel5.Controls.Add(this.label5);
             this.panel5.Controls.Add(this.label2);
-            this.panel5.Controls.Add(this.textBox3);
-            this.panel5.Controls.Add(this.button1);
+            this.panel5.Controls.Add(this.CommentTextBox);
+            this.panel5.Controls.Add(this.AddRating);
             this.panel5.Location = new System.Drawing.Point(74, 473);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(850, 101);
@@ -186,38 +184,32 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(39, 16);
+            this.label15.Location = new System.Drawing.Point(37, 16);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(61, 13);
             this.label15.TabIndex = 1;
             this.label15.Text = "Hodnocení";
             // 
-            // label14
+            // AvgRatingLabel
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label14.Location = new System.Drawing.Point(35, 49);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(67, 39);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "8.8";
+            this.AvgRatingLabel.AutoSize = true;
+            this.AvgRatingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.AvgRatingLabel.Location = new System.Drawing.Point(31, 49);
+            this.AvgRatingLabel.Name = "AvgRatingLabel";
+            this.AvgRatingLabel.Size = new System.Drawing.Size(67, 39);
+            this.AvgRatingLabel.TabIndex = 0;
+            this.AvgRatingLabel.Text = "8.8";
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.label15);
-            this.panel2.Controls.Add(this.label14);
+            this.panel2.Controls.Add(this.AvgRatingLabel);
             this.panel2.Location = new System.Drawing.Point(793, 65);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(131, 109);
             this.panel2.TabIndex = 15;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // NameLabel
             // 
@@ -285,14 +277,59 @@
             this.panel1.Size = new System.Drawing.Size(691, 219);
             this.panel1.TabIndex = 14;
             // 
+            // GenresLabel
+            // 
+            this.GenresLabel.AutoSize = true;
+            this.GenresLabel.Location = new System.Drawing.Point(274, 161);
+            this.GenresLabel.Name = "GenresLabel";
+            this.GenresLabel.Size = new System.Drawing.Size(32, 13);
+            this.GenresLabel.TabIndex = 22;
+            this.GenresLabel.Text = "Žánr:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(226, 161);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(32, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Žánr:";
+            // 
+            // DirectorLabel
+            // 
+            this.DirectorLabel.AutoSize = true;
+            this.DirectorLabel.Location = new System.Drawing.Point(68, 161);
+            this.DirectorLabel.Name = "DirectorLabel";
+            this.DirectorLabel.Size = new System.Drawing.Size(37, 13);
+            this.DirectorLabel.TabIndex = 20;
+            this.DirectorLabel.Text = "Režie:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(19, 161);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(37, 13);
+            this.label17.TabIndex = 19;
+            this.label17.Text = "Režie:";
+            // 
+            // ActorsLabel
+            // 
+            this.ActorsLabel.AutoSize = true;
+            this.ActorsLabel.Location = new System.Drawing.Point(68, 182);
+            this.ActorsLabel.Name = "ActorsLabel";
+            this.ActorsLabel.Size = new System.Drawing.Size(35, 13);
+            this.ActorsLabel.TabIndex = 18;
+            this.ActorsLabel.Text = "Herci:";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(19, 182);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.Size = new System.Drawing.Size(33, 13);
             this.label3.TabIndex = 17;
-            this.label3.Text = "Hrají";
+            this.label3.Text = "Hrají:";
             // 
             // AwardCheckBox
             // 
@@ -405,53 +442,6 @@
             this.PreviousButton.UseVisualStyleBackColor = true;
             this.PreviousButton.Click += new System.EventHandler(this.PreviousButton_Click);
             // 
-            // ActorsLabel
-            // 
-            this.ActorsLabel.AutoSize = true;
-            this.ActorsLabel.Location = new System.Drawing.Point(68, 182);
-            this.ActorsLabel.Name = "ActorsLabel";
-            this.ActorsLabel.Size = new System.Drawing.Size(35, 13);
-            this.ActorsLabel.TabIndex = 18;
-            this.ActorsLabel.Text = "Herci:";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(19, 161);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(37, 13);
-            this.label17.TabIndex = 19;
-            this.label17.Text = "Režie:";
-            this.label17.Click += new System.EventHandler(this.label17_Click);
-            // 
-            // DirectorLabel
-            // 
-            this.DirectorLabel.AutoSize = true;
-            this.DirectorLabel.Location = new System.Drawing.Point(68, 161);
-            this.DirectorLabel.Name = "DirectorLabel";
-            this.DirectorLabel.Size = new System.Drawing.Size(37, 13);
-            this.DirectorLabel.TabIndex = 20;
-            this.DirectorLabel.Text = "Režie:";
-            this.DirectorLabel.Click += new System.EventHandler(this.label10_Click);
-            // 
-            // GenresLabel
-            // 
-            this.GenresLabel.AutoSize = true;
-            this.GenresLabel.Location = new System.Drawing.Point(275, 161);
-            this.GenresLabel.Name = "GenresLabel";
-            this.GenresLabel.Size = new System.Drawing.Size(32, 13);
-            this.GenresLabel.TabIndex = 22;
-            this.GenresLabel.Text = "Žánr:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(226, 161);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(32, 13);
-            this.label10.TabIndex = 21;
-            this.label10.Text = "Žánr:";
-            // 
             // MovieDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -467,11 +457,11 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.panel1);
             this.Name = "MovieDetail";
-            this.Text = "MovieDetail";
+            this.Text = "Detail fimu";
             this.Load += new System.EventHandler(this.MovieDetail_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Rating)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -490,24 +480,22 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown Rating;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox CommentTextBox;
+        private System.Windows.Forms.Button AddRating;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label AvgRatingLabel;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.ServiceProcess.ServiceController l;
         private System.Windows.Forms.Label TimeLabel;
         private System.Windows.Forms.Label CountryLabel;
         private System.Windows.Forms.Label YearLabel;

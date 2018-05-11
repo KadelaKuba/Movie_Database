@@ -1,6 +1,6 @@
 ﻿namespace Main
 {
-    partial class Rates
+    partial class NumberOfActors
     {
         /// <summary>
         /// Required designer variable.
@@ -36,7 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 349);
             this.Name = "Rates";
-            this.Text = "Rates";
+            this.Text = "Počet obsazených herců";
             this.ResumeLayout(false);
 
         }

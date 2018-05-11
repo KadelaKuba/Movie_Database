@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Main
 {
-    public partial class Rates : Form
+    public partial class NumberOfActors : Form
     {
-        public Rates()
+        public NumberOfActors()
         {
             InitializeComponent();
         }

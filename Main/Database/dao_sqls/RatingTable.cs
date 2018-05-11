@@ -11,9 +11,10 @@ namespace Main.ORM.DAO.Sqls
         public static String SQL_SELECT_USER_ID = "SELECT * FROM Rating WHERE User_ID=@User_ID";
         public static String SQL_INSERT = "INSERT INTO Rating VALUES (@Movie_ID, @User_ID, @rate, @dateOfAdd, @comment)";
         public static String SQL_DELETE_ID = "DELETE FROM Rating WHERE Movie_ID=@Movie_ID and User_ID=@User_ID";
+        public static String SQL_DELETE_BY_USER_ID = "DELETE FROM Rating WHERE User_ID=@User_ID";
         public static String SQL_UPDATE = "UPDATE Rating SET rate = @rate, " +
             " dateOfAdd = @dateOfAdd, comment = @comment WHERE Movie_ID=@Movie_ID and User_ID=@User_ID";
-        public static String SQL_ADD_Rating = "EXEC spAddRating @Movie_ID, @UserInfo_ID, @rate, @comment";
+        public static String SQL_ADD_Rating = "EXEC spAddRating @Movie_ID, @User_ID, @rate, @comment";
 
         /// Insert the record.
         public static int Insert(Rating rating, Database pDb = null)
@@ -194,6 +195,33 @@ namespace Main.ORM.DAO.Sqls
             return ret;
         }
 
+        /// Delete the record.
+        public static int DeleteByUser(int User_ID, Database pDb = null)
+        {
+            Database db;
+            if (pDb == null)
+            {
+                db = new Database();
+                db.Connect();
+            }
+            else
+            {
+                db = (Database)pDb;
+            }
+            SqlCommand command = db.CreateCommand(SQL_DELETE_BY_USER_ID);
+
+            command.Parameters.AddWithValue("@User_ID", User_ID);
+
+            int ret = db.ExecuteNonQuery(command);
+
+            if (pDb == null)
+            {
+                db.Close();
+            }
+
+            return ret;
+        }
+
         ///  Prepare a command.
         private static void PrepareCommand(SqlCommand command, Rating Rating)
         {
@@ -232,11 +260,14 @@ namespace Main.ORM.DAO.Sqls
             db.Connect();
             SqlCommand command = db.CreateCommand(SQL_ADD_Rating);
             command.Parameters.AddWithValue("@Movie_ID", Movie_ID);
-            command.Parameters.AddWithValue("@UserInfo_ID", UserInfo_ID);
+            command.Parameters.AddWithValue("@User_ID", UserInfo_ID);
             command.Parameters.AddWithValue("@rate", rate);
             command.Parameters.AddWithValue("@comment", comment);
 
-            //PrepareCommand(command, rating);
+            Console.WriteLine(Movie_ID);
+            Console.WriteLine(UserInfo_ID);
+            Console.WriteLine(rate);
+            Console.WriteLine(comment);
 
             int ret = db.ExecuteNonQuery(command);
             db.Close();

@@ -6,7 +6,9 @@ namespace Main.ORM.DAO.Sqls
 {
     public class MovieTable
     {
-        public static String SQL_SELECT = "SELECT * FROM Movie";
+        public static String SQL_SELECT = "SELECT M.ID, M.title, M.year, M.time, M.language, M.description, M.country, M.award, M.premiere, " +
+            "M.Director_ID, AVG(R.rate) FROM Movie M LEFT JOIN Rating R ON R.Movie_ID = M.ID " +
+            "GROUP BY M.ID, M.title, M.year, M.time, M.language, M.description, M.country, M.award, M.premiere, M.Director_ID, M.title";
         public static String SQL_SELECT_ID = "SELECT * FROM Movie WHERE ID=@ID";
         public static String SQL_INSERT = "INSERT INTO Movie VALUES (@ID, @title, @year, @time, @language, " +
             "@description, @country, @award, @premiere, @Director_ID)";
@@ -197,6 +199,10 @@ namespace Main.ORM.DAO.Sqls
                 }
                 Movie.Premiere = reader.GetDateTime(++i);
                 Movie.Director_id = reader.GetInt32(++i);
+                if (!reader.IsDBNull(++i))
+                {
+                    Movie.AvgRating = reader.GetDecimal(i);
+                }
 
                 Movies.Add(Movie);
             }

@@ -26,7 +26,7 @@ namespace Main
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Rates rates = new Rates();
+            NumberOfActors rates = new NumberOfActors();
             rates.Show();
         }
 

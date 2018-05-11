@@ -1,13 +1,7 @@
 ﻿using Main.ORM;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Main.ORM.DAO.Sqls;
 
@@ -25,6 +19,7 @@ namespace Main
 
         private void MovieDetail_Load(object sender, EventArgs e)
         {
+            RatingTable.DeleteByUser(UserInfo.TEST_USER_ID);
             PreviousButton.Enabled = false;
             index = 0;
             movies = MovieTable.Select();
@@ -41,6 +36,7 @@ namespace Main
             DescriptionLabel.Text = movies[index].Description.ToString();
             PremiereLabel.Text = movies[index].Premiere.ToLongDateString();
             AwardCheckBox.Checked = movies[index].Award.GetValueOrDefault();
+            AvgRatingLabel.Text = movies[index].AvgRating.ToString("0.##");
 
             setActorsLabel(movies[index].Id);
             setDirectorLabel(movies[index].Id);
@@ -105,6 +101,7 @@ namespace Main
 
         private void NextButton_Click(object sender, EventArgs e)
         {
+            AddRating.Enabled = true;
             index++;
             SetLabelsForMovie();
             PreviousButton.Enabled = true;
@@ -121,6 +118,7 @@ namespace Main
 
         private void PreviousButton_Click(object sender, EventArgs e)
         {
+            AddRating.Enabled = true;
             index--;
             SetLabelsForMovie();
             NextButton.Enabled = true;
@@ -135,14 +133,10 @@ namespace Main
             }
         }
 
-        private void label17_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
+            RatingTable.AddRating(movies[index].Id, UserInfo.TEST_USER_ID, Rating.Value, CommentTextBox.Text);
+            AddRating.Enabled = false;
         }
     }
 }

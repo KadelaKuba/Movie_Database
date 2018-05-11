@@ -15,6 +15,8 @@ namespace Main.ORM
         public DateTime Premiere { get; set; }
         public int Director_id { get; set; }
 
+        public decimal AvgRating { get; set; }
+
         public override string ToString()
         {
             return "ID: " + Id + ", Title: " + Title + ", Year: " + Year + ", Time: " + Time;
