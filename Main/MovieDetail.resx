@@ -117,19 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DescriptionLabel.Text" xml:space="preserve">
+    <value>LoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsum</value>
+  </data>
   <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>181, 17</value>
   </metadata>
-  <data name="label3.Text" xml:space="preserve">
-    <value>
-Silné téma, vynikající scénář plný zvratů a životní herecké výkony poskládaly dohromady thriller o pátrání po dvou zmizelých děvčatech, 
-který je napínavý až k nesnesení. Keller Dover (Hugh Jackman) čelí asi nejhorší noční můře každého rodiče, 
-jeho šestiletá dcera Anna a její kamarádka Joy jednoho večera na Díkuvzdání zmizí. Jejich hledání nebere konce, hodiny se vlečnou a dívky jsou stále pohřešovány. 
-Do objektu zájmu se při pátrání dostane zchátralý karavan, který parkoval před jejich domem a u kterého si dívky naposledy hrály. 
-K případu je povolán detektiv Loki (Jake Gyllenhaal), který zatýká řidiče karavanu, retardovaného Alexe Jonese (Paul Dano), 
-ale pro nedostatek důkazů je Jones po nějaké době propuštěn.  Oficiální pátrání sice stále pokračuje, ale Dover se cítí bezradný, jeho strach se mísí se vztekem a zlobou. 
-Bere spravedlnost do svých rukou a bez ohledu na následky se rozhodne vyslechnout jediné pojítko k případu sám, po svém a bez rukaviček.</value>
-  </data>
   <metadata name="l.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>291, 17</value>
   </metadata>

@@ -8,6 +8,9 @@ namespace Main.ORM.DAO.Sqls
     {
         public static String SQL_SELECT = "SELECT * FROM Actor";
         public static String SQL_SELECT_ID = "SELECT * FROM Actor WHERE ID=@ID";
+        public static String SQL_SELECT_ACTORS_FOR_MOVIE = "SELECT A.ID, A.firstName, A.lastName, A.nationality, A.birthplace, A.height " +
+            "FROM Movie M JOIN MovieActor MA ON MA.Movie_ID = M.ID JOIN Actor A ON A.ID = MA.Actor_ID " +
+            "WHERE MA.Movie_ID = @Movie_ID";
         public static String SQL_INSERT = "INSERT INTO Actor VALUES (@ID, @firstName, @lastName, @nationality, @birthplace, @height)";
         public static String SQL_DELETE_ID = "DELETE FROM Actor WHERE ID=@ID";
         public static String SQL_UPDATE = "UPDATE Actor SET firstName = @firstName, lastName = @lastName, nationality = @nationality, " +
@@ -128,6 +131,37 @@ namespace Main.ORM.DAO.Sqls
 
             return actor;
         }
+
+        /// Select the records.
+        public static Collection<Actor> SelectActorsForMovie(int Movie_ID, Database pDb = null)
+        {
+            Database db;
+            if (pDb == null)
+            {
+                db = new Database();
+                db.Connect();
+            }
+            else
+            {
+                db = (Database)pDb;
+            }
+
+            SqlCommand command = db.CreateCommand(SQL_SELECT_ACTORS_FOR_MOVIE);
+            command.Parameters.AddWithValue("@Movie_ID", Movie_ID);
+            //Console.WriteLine(command.CommandText);
+            SqlDataReader reader = db.Select(command);
+
+            Collection<Actor> actors = Read(reader);
+            reader.Close();
+
+            if (pDb == null)
+            {
+                db.Close();
+            }
+
+            return actors;
+        }
+
 
         /// Delete the record.
         public static int Delete(int ID, Database pDb = null)

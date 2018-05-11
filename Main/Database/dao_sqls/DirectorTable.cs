@@ -8,6 +8,8 @@ namespace Main.ORM.DAO.Sqls
     {
         public static String SQL_SELECT = "SELECT * FROM Director";
         public static String SQL_SELECT_ID = "SELECT * FROM Director WHERE ID=@ID";
+        public static String SQL_SELECT_DIRECTOR_FOR_MOVIE = "SELECT D.ID, D.firstName, D.lastName, D.nationality, D.birthplace, D.height " +
+            "FROM Director D JOIN Movie M ON M.Director_ID = D.ID WHERE M.ID = @ID";
         public static String SQL_INSERT = "INSERT INTO Director VALUES (@ID, @firstName, @lastName, @nationality, @birthplace, @height)";
         public static String SQL_DELETE_ID = "DELETE FROM Director WHERE ID=@ID";
         public static String SQL_UPDATE = "UPDATE Director SET firstName = @firstName, lastName = @lastName, nationality = @nationality, " +
@@ -127,6 +129,36 @@ namespace Main.ORM.DAO.Sqls
             }
 
             return director;
+        }
+
+        /// Select the records.
+        public static Collection<Director> SelectDirectorForMovie(int Movie_ID, Database pDb = null)
+        {
+            Database db;
+            if (pDb == null)
+            {
+                db = new Database();
+                db.Connect();
+            }
+            else
+            {
+                db = (Database)pDb;
+            }
+
+            SqlCommand command = db.CreateCommand(SQL_SELECT_DIRECTOR_FOR_MOVIE);
+            command.Parameters.AddWithValue("@ID", Movie_ID);
+
+            SqlDataReader reader = db.Select(command);
+
+            Collection<Director> directors = Read(reader);
+            reader.Close();
+
+            if (pDb == null)
+            {
+                db.Close();
+            }
+
+            return directors;
         }
 
         /// Delete the record.

@@ -8,6 +8,9 @@ namespace Main.ORM.DAO.Sqls
     {
         public static String SQL_SELECT = "SELECT * FROM Genre";
         public static String SQL_SELECT_ID = "SELECT * FROM Genre WHERE ID=@ID";
+        public static String SQL_SELECT_GENRES_FOR_MOVIE = "SELECT G.ID, G.name, G.description FROM Movie M " +
+            "JOIN MovieGenre MG ON MG.Movie_ID = M.ID JOIN Genre G ON G.ID = MG.Genre_ID " +
+            "WHERE MG.Movie_ID = @Movie_ID";
         public static String SQL_INSERT = "INSERT INTO Genre VALUES (@ID, @name, @description)";
         public static String SQL_DELETE_ID = "DELETE FROM Genre WHERE ID=@ID";
         public static String SQL_UPDATE = "UPDATE Genre SET name = @name, description = @description";
@@ -126,6 +129,36 @@ namespace Main.ORM.DAO.Sqls
             }
 
             return genre;
+        }
+
+        /// Select the records.
+        public static Collection<Genre> SelectGenresForMovie(int Movie_ID, Database pDb = null)
+        {
+            Database db;
+            if (pDb == null)
+            {
+                db = new Database();
+                db.Connect();
+            }
+            else
+            {
+                db = (Database)pDb;
+            }
+
+            SqlCommand command = db.CreateCommand(SQL_SELECT_GENRES_FOR_MOVIE);
+            command.Parameters.AddWithValue("@Movie_ID", Movie_ID);
+
+            SqlDataReader reader = db.Select(command);
+
+            Collection<Genre> genres = Read(reader);
+            reader.Close();
+
+            if (pDb == null)
+            {
+                db.Close();
+            }
+
+            return genres;
         }
 
         /// Delete the record.
