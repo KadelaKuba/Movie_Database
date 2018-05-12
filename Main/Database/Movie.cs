@@ -16,6 +16,12 @@ namespace Main.ORM
         public int Director_id { get; set; }
 
         public decimal AvgRating { get; set; }
+        public bool EnabledRating { get; set; }
+
+        public Movie()
+        {
+            EnabledRating = true;
+        }
 
         public override string ToString()
         {

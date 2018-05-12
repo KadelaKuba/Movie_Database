@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace Main.ORM.DAO.Sqls
 {
@@ -285,17 +286,26 @@ namespace Main.ORM.DAO.Sqls
 
         public static int AddRating(int Movie_ID, int UserInfo_ID, decimal rate, string comment)
         {
-            Database db = new Database();
-            db.Connect();
-            SqlCommand command = db.CreateCommand(SQL_ADD_Rating);
-            command.Parameters.AddWithValue("@Movie_ID", Movie_ID);
-            command.Parameters.AddWithValue("@User_ID", UserInfo_ID);
-            command.Parameters.AddWithValue("@rate", rate);
-            command.Parameters.AddWithValue("@comment", comment);
+            try
+            {
+                Database db = new Database();
+                db.Connect();
+                SqlCommand command = db.CreateCommand(SQL_ADD_Rating);
+                command.Parameters.AddWithValue("@Movie_ID", Movie_ID);
+                command.Parameters.AddWithValue("@User_ID", UserInfo_ID);
+                command.Parameters.AddWithValue("@rate", rate);
+                command.Parameters.AddWithValue("@comment", comment);
 
-            int ret = db.ExecuteNonQuery(command);
-            db.Close();
-            return ret;
+                int ret = db.ExecuteNonQuery(command);
+
+                db.Close();
+                return ret;
+            }
+            catch(SqlException exception)
+            {
+                MessageBox.Show(exception.Message);
+                return 0;
+            }
         }
     }
 }

@@ -111,7 +111,7 @@ namespace Main
             foreach (Movie mov in movies)
             {
                 Console.WriteLine(MovieTable.Select(mov.Id, db).ToString());
-                Console.WriteLine("Actor number: " + MovieTable.Select_Actor_Number()); //1.6 Výpis filmů a k nim počet obsazených herců
+                Console.WriteLine("Actor number: " + MovieTable.Select_Actor_Number(mov.Id)); //1.6 Výpis filmů a k nim počet obsazených herců
             }
 
             Console.WriteLine("\n\n                           Genre                              ");

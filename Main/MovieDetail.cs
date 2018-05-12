@@ -19,7 +19,7 @@ namespace Main
 
         private void MovieDetail_Load(object sender, EventArgs e)
         {
-            //RatingTable.DeleteByUser(UserInfo.TEST_USER_ID);
+            RatingTable.DeleteByUser(UserInfo.TEST_USER_ID);
             PreviousButton.Enabled = false;
             index = 0;
             movies = MovieTable.Select();
@@ -42,6 +42,20 @@ namespace Main
             setDirectorLabel(movies[index].Id);
             setGenresLabel(movies[index].Id);
             setMyRatingLabel(movies[index].Id);
+
+            EnableOrDisableAddButton();
+        }
+
+        public void EnableOrDisableAddButton()
+        {
+            if (movies[index].EnabledRating)
+            {
+                AddRating.Enabled = true;
+            }
+            else
+            {
+                AddRating.Enabled = false;
+            }
         }
 
         public void setActorsLabel(int Movie_ID)
@@ -115,7 +129,6 @@ namespace Main
 
         private void NextButton_Click(object sender, EventArgs e)
         {
-            AddRating.Enabled = true;
             index++;
             SetDataForMovie();
             PreviousButton.Enabled = true;
@@ -132,7 +145,6 @@ namespace Main
 
         private void PreviousButton_Click(object sender, EventArgs e)
         {
-            AddRating.Enabled = true;
             index--;
             SetDataForMovie();
             NextButton.Enabled = true;
@@ -149,17 +161,19 @@ namespace Main
 
         private void button1_Click(object sender, EventArgs e)
         {
-            RatingTable.AddRating(movies[index].Id, UserInfo.TEST_USER_ID, Rating.Value, CommentTextBox.Text);
-            AddRating.Enabled = false;
+            RatingTable.AddRating(movies[index].Id, UserInfo.TEST_USER_ID, Convert.ToDecimal(RatingButton.Text), CommentTextBox.Text);
             setMyRatingLabel(movies[index].Id);
+            movies[index].EnabledRating = false;
+            EnableOrDisableAddButton();
+            AvgRatingLabel.Text = MovieTable.SelectAvgRatingForMovie(movies[index].Id).ToString("0.##");
         }
 
-        private void DescriptionLabel_Click(object sender, EventArgs e)
+        private void MyRating_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        private void AvgRatingLabel_Click(object sender, EventArgs e)
         {
 
         }

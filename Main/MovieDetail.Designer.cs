@@ -33,7 +33,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.MyRating = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.Rating = new System.Windows.Forms.NumericUpDown();
+            this.RatingButton = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.CommentTextBox = new System.Windows.Forms.TextBox();
@@ -68,7 +68,7 @@
             this.NextButton = new System.Windows.Forms.Button();
             this.PreviousButton = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Rating)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RatingButton)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -105,6 +105,7 @@
             this.MyRating.TabIndex = 1;
             this.MyRating.Text = "Hodnocení";
             this.MyRating.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.MyRating.Click += new System.EventHandler(this.MyRating_Click);
             // 
             // label13
             // 
@@ -116,13 +117,29 @@
             this.label13.Text = "Mé hodnocení";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Rating
+            // RatingButton
             // 
-            this.Rating.AutoSize = true;
-            this.Rating.Location = new System.Drawing.Point(77, 55);
-            this.Rating.Name = "Rating";
-            this.Rating.Size = new System.Drawing.Size(120, 20);
-            this.Rating.TabIndex = 5;
+            this.RatingButton.AutoSize = true;
+            this.RatingButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.RatingButton.Location = new System.Drawing.Point(74, 55);
+            this.RatingButton.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.RatingButton.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.RatingButton.Name = "RatingButton";
+            this.RatingButton.Size = new System.Drawing.Size(120, 20);
+            this.RatingButton.TabIndex = 5;
+            this.RatingButton.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label5
             // 
@@ -168,7 +185,7 @@
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.Rating);
+            this.panel5.Controls.Add(this.RatingButton);
             this.panel5.Controls.Add(this.label5);
             this.panel5.Controls.Add(this.label2);
             this.panel5.Controls.Add(this.CommentTextBox);
@@ -198,7 +215,6 @@
             this.DescriptionLabel.Size = new System.Drawing.Size(800, 80);
             this.DescriptionLabel.TabIndex = 4;
             this.DescriptionLabel.Text = resources.GetString("DescriptionLabel.Text");
-            this.DescriptionLabel.Click += new System.EventHandler(this.DescriptionLabel_Click);
             // 
             // label15
             // 
@@ -219,6 +235,7 @@
             this.AvgRatingLabel.TabIndex = 0;
             this.AvgRatingLabel.Text = "8.8";
             this.AvgRatingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.AvgRatingLabel.Click += new System.EventHandler(this.AvgRatingLabel_Click);
             // 
             // panel2
             // 
@@ -501,7 +518,7 @@
             this.Text = "Detail fimu";
             this.Load += new System.EventHandler(this.MovieDetail_Load);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Rating)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RatingButton)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -518,7 +535,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.NumericUpDown Rating;
+        private System.Windows.Forms.NumericUpDown RatingButton;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox CommentTextBox;

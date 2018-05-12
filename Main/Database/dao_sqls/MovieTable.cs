@@ -10,15 +10,14 @@ namespace Main.ORM.DAO.Sqls
             "M.Director_ID, AVG(R.rate) FROM Movie M LEFT JOIN Rating R ON R.Movie_ID = M.ID " +
             "GROUP BY M.ID, M.title, M.year, M.time, M.language, M.description, M.country, M.award, M.premiere, M.Director_ID, M.title";
         public static String SQL_SELECT_ID = "SELECT * FROM Movie WHERE ID=@ID";
+        public static String SQL_SELECT_AVG_RATING_FOR_MOVIE = "SELECT AVG(R.rate) FROM Movie M LEFT JOIN Rating R ON R.Movie_ID = M.ID WHERE M.Id = @ID";
         public static String SQL_INSERT = "INSERT INTO Movie VALUES (@ID, @title, @year, @time, @language, " +
             "@description, @country, @award, @premiere, @Director_ID)";
         public static String SQL_DELETE_ID = "DELETE FROM Movie WHERE ID=@ID";
         public static String SQL_UPDATE = "UPDATE Movie SET ID = @ID, title = @title, year = @year, " +
             " time = @time, language = @language, description = @description, country = @country, award = @award, premiere = @premiere, " +
             " Director_ID = @Director_ID WHERE ID=@ID";
-        public static String SQL_ACTOR_NUMBER = "SELECT M.id, Count(MA.Movie_ID) " +
-            "FROM Movie M LEFT JOIN MovieActor MA ON M.ID = MA.Movie_ID " +
-            "GROUP BY M.id";
+        public static String SQL_ACTOR_NUMBER = "SELECT Count(MA.Movie_ID) FROM MovieActor MA WHERE MA.Movie_ID = @ID";
 
         public static int Insert(Movie movie, Database pDb = null)
         {
@@ -203,12 +202,14 @@ namespace Main.ORM.DAO.Sqls
             return Movies;
         }
 
-        public static int Select_Actor_Number()
+        public static int Select_Actor_Number(int Movie_ID)
         {
             Database db = new Database();
             db.Connect();
 
             SqlCommand command = db.CreateCommand(SQL_ACTOR_NUMBER);
+            command.Parameters.AddWithValue("@ID", Movie_ID);
+
             SqlDataReader reader = db.Select(command);
             int count = 0;
             while (reader.Read())
@@ -217,7 +218,33 @@ namespace Main.ORM.DAO.Sqls
 
                 if (!reader.IsDBNull(++i))
                 {
-                    count = reader.GetInt32(++i);
+                    count = reader.GetInt32(i);
+                }
+
+            }
+            reader.Close();
+            db.Close();
+
+            return count;
+        }
+
+        public static decimal SelectAvgRatingForMovie(int Movie_ID)
+        {
+            Database db = new Database();
+            db.Connect();
+
+            SqlCommand command = db.CreateCommand(SQL_SELECT_AVG_RATING_FOR_MOVIE);
+            command.Parameters.AddWithValue("@ID", Movie_ID);
+
+            SqlDataReader reader = db.Select(command);
+            decimal count = 0.0m;
+            while (reader.Read())
+            {
+                int i = -1;
+
+                if (!reader.IsDBNull(++i))
+                {
+                    count = reader.GetDecimal(i);
                 }
 
             }
