@@ -105,7 +105,6 @@
             this.MyRating.TabIndex = 1;
             this.MyRating.Text = "Hodnocení";
             this.MyRating.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.MyRating.Click += new System.EventHandler(this.MyRating_Click);
             // 
             // label13
             // 
@@ -235,7 +234,6 @@
             this.AvgRatingLabel.TabIndex = 0;
             this.AvgRatingLabel.Text = "8.8";
             this.AvgRatingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.AvgRatingLabel.Click += new System.EventHandler(this.AvgRatingLabel_Click);
             // 
             // panel2
             // 

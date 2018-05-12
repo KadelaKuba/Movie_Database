@@ -167,15 +167,5 @@ namespace Main
             EnableOrDisableAddButton();
             AvgRatingLabel.Text = MovieTable.SelectAvgRatingForMovie(movies[index].Id).ToString("0.##");
         }
-
-        private void MyRating_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AvgRatingLabel_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
