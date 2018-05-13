@@ -10,16 +10,14 @@ namespace Main
     {
         static void Main(string[] args)
         {
-            //TryAllOperationsOfModel();
-
             Database db = new Database();
             db.Connect();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainMenu());
 
             db.Close();
-
         }
 
         public static void TryAllOperationsOfModel()

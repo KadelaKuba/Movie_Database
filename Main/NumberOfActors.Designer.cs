@@ -40,9 +40,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(70, 87);
+            this.button1.Location = new System.Drawing.Point(54, 83);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(496, 23);
+            this.button1.Size = new System.Drawing.Size(540, 23);
             this.button1.TabIndex = 3;
             this.button1.Text = "Zobrazit počet obsazených herců";
             this.button1.UseVisualStyleBackColor = true;
@@ -52,7 +52,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(65, 38);
+            this.label1.Location = new System.Drawing.Point(49, 34);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(249, 25);
             this.label1.TabIndex = 2;
@@ -68,9 +68,9 @@
             this.Počet_Herců});
             this.NumberOfActorsView.FullRowSelect = true;
             this.NumberOfActorsView.GridLines = true;
-            this.NumberOfActorsView.Location = new System.Drawing.Point(70, 140);
+            this.NumberOfActorsView.Location = new System.Drawing.Point(54, 136);
             this.NumberOfActorsView.Name = "NumberOfActorsView";
-            this.NumberOfActorsView.Size = new System.Drawing.Size(496, 169);
+            this.NumberOfActorsView.Size = new System.Drawing.Size(540, 169);
             this.NumberOfActorsView.TabIndex = 4;
             this.NumberOfActorsView.UseCompatibleStateImageBehavior = false;
             this.NumberOfActorsView.View = System.Windows.Forms.View.Details;
@@ -83,28 +83,31 @@
             // Název
             // 
             this.Název.Text = "Název";
-            this.Název.Width = 141;
+            this.Název.Width = 187;
             // 
             // Rok
             // 
             this.Rok.Text = "Rok";
+            this.Rok.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Rok.Width = 70;
             // 
             // Premiéra
             // 
             this.Premiéra.Text = "Premiéra";
+            this.Premiéra.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Premiéra.Width = 152;
             // 
             // Počet_Herců
             // 
             this.Počet_Herců.Text = "Počet_Herců";
+            this.Počet_Herců.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Počet_Herců.Width = 83;
             // 
             // NumberOfActors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(655, 357);
+            this.ClientSize = new System.Drawing.Size(655, 327);
             this.Controls.Add(this.NumberOfActorsView);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);

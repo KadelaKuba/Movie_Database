@@ -2,7 +2,7 @@
 {
     public class UserInfo
     {
-        public const int TEST_USER_ID = 5;
+        public const int TEST_USER_ID = 1;
 
         public int Id { get; set; }
         public string Nickname { get; set; }
