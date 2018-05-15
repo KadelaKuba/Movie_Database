@@ -67,6 +67,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.NextButton = new System.Windows.Forms.Button();
             this.PreviousButton = new System.Windows.Forms.Button();
+            this.CommentsView = new System.Windows.Forms.ListView();
+            this.Nickname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Rating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.comment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RatingButton)).BeginInit();
             this.panel5.SuspendLayout();
@@ -498,11 +502,43 @@
             this.PreviousButton.UseVisualStyleBackColor = true;
             this.PreviousButton.Click += new System.EventHandler(this.PreviousButton_Click);
             // 
+            // CommentsView
+            // 
+            this.CommentsView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Nickname,
+            this.Rating,
+            this.comment});
+            this.CommentsView.GridLines = true;
+            this.CommentsView.Location = new System.Drawing.Point(14, 608);
+            this.CommentsView.Name = "CommentsView";
+            this.CommentsView.Size = new System.Drawing.Size(848, 100);
+            this.CommentsView.TabIndex = 22;
+            this.CommentsView.UseCompatibleStateImageBehavior = false;
+            this.CommentsView.View = System.Windows.Forms.View.Details;
+            // 
+            // Nickname
+            // 
+            this.Nickname.Text = "Nickname";
+            this.Nickname.Width = 230;
+            // 
+            // Rating
+            // 
+            this.Rating.Text = "Rating";
+            this.Rating.Width = 232;
+            // 
+            // comment
+            // 
+            this.comment.Text = "comment";
+            this.comment.Width = 213;
+            // 
             // MovieDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(879, 623);
+            this.AutoScroll = true;
+            this.AutoScrollMinSize = new System.Drawing.Size(700, 906);
+            this.ClientSize = new System.Drawing.Size(890, 741);
+            this.Controls.Add(this.CommentsView);
             this.Controls.Add(this.PreviousButton);
             this.Controls.Add(this.NextButton);
             this.Controls.Add(this.label16);
@@ -568,5 +604,9 @@
         private System.Windows.Forms.Label GenresLabel;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label MyRating;
+        private System.Windows.Forms.ListView CommentsView;
+        private System.Windows.Forms.ColumnHeader Rating;
+        private System.Windows.Forms.ColumnHeader Nickname;
+        private System.Windows.Forms.ColumnHeader comment;
     }
 }

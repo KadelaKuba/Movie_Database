@@ -96,7 +96,7 @@ namespace Main.ORM.DAO.Sqls
             return ratings;
         }
 
-        public static Rating SelectMovieID(int Movie_ID, Database pDb = null)
+        public static Collection<Rating> SelectMovieID(int Movie_ID, Database pDb = null)
         {
             Database db;
             if (pDb == null)
@@ -115,11 +115,7 @@ namespace Main.ORM.DAO.Sqls
             SqlDataReader reader = db.Select(command);
 
             Collection<Rating> Ratings = Read(reader);
-            Rating Rating = null;
-            if (Ratings.Count == 1)
-            {
-                Rating = Ratings[0];
-            }
+            
             reader.Close();
 
             if (pDb == null)
@@ -127,7 +123,7 @@ namespace Main.ORM.DAO.Sqls
                 db.Close();
             }
 
-            return Rating;
+            return Ratings;
         }
 
         public static Rating SelectUserID(int User_ID, Database pDb = null)

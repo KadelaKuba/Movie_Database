@@ -44,6 +44,7 @@ namespace Main
             setMyRatingLabel(movies[index].Id);
 
             EnableOrDisableAddButton();
+            loadCommentsForMovie(movies[index].Id);
         }
 
         public void EnableOrDisableAddButton()
@@ -165,7 +166,31 @@ namespace Main
             setMyRatingLabel(movies[index].Id);
             movies[index].EnabledRating = false;
             EnableOrDisableAddButton();
+            loadCommentsForMovie(movies[index].Id);
             AvgRatingLabel.Text = MovieTable.SelectAvgRatingForMovie(movies[index].Id).ToString("0.##");
+        }
+
+        private void loadCommentsForMovie(int Movie_ID)
+        {
+            string comment;
+            CommentsView.Items.Clear();
+            Collection<Rating> ratings = RatingTable.SelectMovieID(Movie_ID);
+            foreach (Rating rating in ratings)
+            {
+                if(rating.Comment == null)
+                {
+                    comment = "";
+                }
+                else
+                {
+                    comment = rating.Comment.ToString();
+                }
+                UserInfo user = new UserInfo();
+                user = UserTable.Select(rating.User_id);
+                string[] row = { user.Nickname, rating.Rate.ToString(), comment };
+                var listViewItem = new ListViewItem(row);
+                CommentsView.Items.Add(listViewItem);
+            }
         }
     }
 }
